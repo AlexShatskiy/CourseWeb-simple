@@ -19,14 +19,14 @@ public class CourseServiceImpl implements CourseService {
 	private static final Logger log = LogManager.getRootLogger();
 
 	@Override
-	public void addBook(String title, String content, int userId) throws ServiceException {
+	public void addCourse(String title, String content) throws ServiceException {
 		
 		Course course = null;
 		
 		course = new Course();
 		course.setTitle(title);
 		course.setContent(content);
-		course.setUserId(userId);
+
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		CourseDAO courseDAO = factory.getCourseDAO();
@@ -40,27 +40,11 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void deleteBook(int courseId, String title, String content) throws ServiceException {
+	public void deleteCourse(int courseId, String title, String content) throws ServiceException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public List<Course> getCourseForTitle(String title) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public List<Course> getCourseForAuthor(String author) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Course> getCourseForUserId(int userId) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -1,4 +1,4 @@
-package com.sh.course.controller.command.impl;
+package com.sh.course.controller.command.impl.page;
 
 import java.io.IOException;
 
@@ -11,11 +11,11 @@ import com.sh.course.controller.command.Command;
 import com.sh.course.controller.command.parameter.PageLibrary;
 
 
-public class PasswordRecoveryPage implements Command {
+public class AddCoursePage implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.PASSWORD_RECOVERY);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.ADD_COURSE_PAGE);
 		dispatcher.forward(request, response);
 	}
 }

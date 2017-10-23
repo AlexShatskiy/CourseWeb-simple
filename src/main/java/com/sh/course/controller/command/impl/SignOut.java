@@ -20,7 +20,6 @@ public class SignOut implements Command {
 		session.removeAttribute(SessionAttribute.USER_ID);
 		session.removeAttribute(SessionAttribute.ROLE);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.INDEX);
-		dispatcher.forward(request, response);
+		response.sendRedirect(PageLibrary.INDEX);
 	}
 }

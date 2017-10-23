@@ -25,10 +25,8 @@ public class AddCourse implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title;
 		String content;
-		Integer userId;
 		
 		HttpSession session = request.getSession(true);
-		userId = (Integer) session.getAttribute(SessionAttribute.USER_ID);
 		
 		ServiceFactory factory = ServiceFactory.getInstance();
 		CourseService bookService = factory.getCourseService();
@@ -37,12 +35,11 @@ public class AddCourse implements Command {
 		content = request.getParameter(PageParameter.CONTENT);
 		
 		try {
-			bookService.addBook(title, content, userId);
+			bookService.addCourse(title, content);
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		response.sendRedirect(URL_GOOD_ADD);
-		
 	}
 }

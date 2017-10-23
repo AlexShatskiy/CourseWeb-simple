@@ -9,8 +9,15 @@ import com.sh.course.domain.Course;
 
 public interface CourseDAO {
 	void addCourse(Course course) throws ConnectionPoolException, DaoException;
-	void deleteCourse(Course course) throws ConnectionPoolException;
-	List<Course> getCourseForTitle(String title) throws ConnectionPoolException;
-	List<Course> getCourseForAuthor(String author) throws ConnectionPoolException;
-	List<Course> getCourseForUserId(int userId) throws ConnectionPoolException;
+	void addLecturerCourse(int userId, int courseId) throws ConnectionPoolException, DaoException;
+	void deleteLecturerCourse(int userId, int courseId) throws ConnectionPoolException, DaoException;
+	
+	List<Course> getAllCourse() throws ConnectionPoolException;
+	List<Course> getAvailableCourse() throws ConnectionPoolException;
+	List<Course> getAllCourseLecturer(int lecturerId) throws ConnectionPoolException;
+	List<Course> getAllLecturerCourse(int courseId) throws ConnectionPoolException;
+	List<Course> searchAvailableCourse(String titleOrContent) throws ConnectionPoolException;
+	
+	boolean hasCourseTitle(String title) throws ConnectionPoolException;
+	boolean hasCourseLecturer(String title) throws ConnectionPoolException;
 }

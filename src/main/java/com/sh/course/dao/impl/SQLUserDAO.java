@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.sh.course.dao.UserDAO;
+import com.sh.course.dao.close.CloseManager;
 import com.sh.course.dao.connection.ConnectionPool;
 import com.sh.course.dao.exception.ConnectionPoolException;
 import com.sh.course.domain.User;
@@ -65,30 +66,7 @@ public class SQLUserDAO implements UserDAO {
 			log.error(e);
 			throw new ConnectionPoolException(e);
 		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (preparedStatement != null) {
-				try {
-					preparedStatement.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return user;
 	}
@@ -121,30 +99,7 @@ public class SQLUserDAO implements UserDAO {
 			log.error(e);
 			throw new ConnectionPoolException(e);
 		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (preparedStatement != null) {
-				try {
-					preparedStatement.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return user;
 	}
@@ -173,30 +128,7 @@ public class SQLUserDAO implements UserDAO {
 			log.error(e);
 			throw new ConnectionPoolException(e);
 		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (preparedStatement != null) {
-				try {
-					preparedStatement.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return isHasEmail;
 	}
@@ -225,30 +157,7 @@ public class SQLUserDAO implements UserDAO {
 			log.error(e);
 			throw new ConnectionPoolException(e);
 		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (preparedStatement != null) {
-				try {
-					preparedStatement.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return isHasNickname;
 	}
@@ -258,15 +167,15 @@ public class SQLUserDAO implements UserDAO {
 		String passwordSQL = null;
 
 		Connection connection = null;
-		PreparedStatement ps = null;
+		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		ConnectionPool pool = ConnectionPool.getInstance();
 		connection = pool.takeConnection();
 		try {
-			ps = connection.prepareStatement(GET_PASSWORD);
-			ps.setString(1, email);
-			resultSet = ps.executeQuery();
+			preparedStatement = connection.prepareStatement(GET_PASSWORD);
+			preparedStatement.setString(1, email);
+			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 				passwordSQL = resultSet.getString(1);
@@ -276,30 +185,7 @@ public class SQLUserDAO implements UserDAO {
 			log.error(e);
 			throw new ConnectionPoolException(e);
 		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return passwordSQL;
 	}
@@ -336,30 +222,7 @@ public class SQLUserDAO implements UserDAO {
 			log.error(e);
 			throw new ConnectionPoolException(e);
 		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (preparedStatement != null) {
-				try {
-					preparedStatement.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return users;
 	}
@@ -388,30 +251,7 @@ public class SQLUserDAO implements UserDAO {
 			log.error(e);
 			throw new ConnectionPoolException(e);
 		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (preparedStatement != null) {
-				try {
-					preparedStatement.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					log.error(e);
-					throw new ConnectionPoolException(e);
-				}
-			}
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return userIdSQL;
 	}

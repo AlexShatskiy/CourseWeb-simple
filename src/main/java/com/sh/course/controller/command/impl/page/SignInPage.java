@@ -1,4 +1,4 @@
-package com.sh.course.controller.command.impl;
+package com.sh.course.controller.command.impl.page;
 
 import java.io.IOException;
 
