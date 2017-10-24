@@ -2,9 +2,9 @@ package com.sh.course.service;
 
 import java.util.List;
 
-import com.sh.course.domain.Patent;
+import com.sh.course.domain.Diploma;
 
 public interface PatentService {
-	Patent addPatent(int userId, int courseId, String comment, int rating);
-	List<Patent> getPatent(int userId);
+	Diploma addPatent(int userId, int courseId, String comment, int rating);
+	List<Diploma> getPatent(int userId);
 }
