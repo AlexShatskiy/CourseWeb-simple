@@ -87,8 +87,13 @@
 			<div class="row">
 				<h1 class="lead"><fmt:message key="login.label.welcome" /></h1>
 				<p class="tagline"><fmt:message key="login.label.onSite" /></p>
-				<p><a class="btn btn-default btn-lg" role="button">COURSE</a> 
-				<a class="btn btn-default btn-lg" role="button">LECTURER</a></p>
+				<form method="get" action="controller">
+				 	<input type="hidden" name="command" value="GET_AVAILABLE_COURSE" /> 
+					<button type="submit" class="btn btn-default btn-lg">
+						COURSE
+					</button>
+				</form>
+
 			</div>
 		</div>
 	</header>
@@ -96,19 +101,51 @@
 
 	<!-- Intro -->
 	<div class="container text-center">
-		<br> <br>
-		<h2 class="thin">##################################################</h2>
-		<p class="text-muted"></p>
-			<fmt:message key="login.label.username" />
+		<br>
+		<c:if test="${empty requestScope.COURSES }">
+			<h2 class="thin">##################################################</h2>
+			<p class="text-muted"><fmt:message key="login.label.username" /></p>
+		</c:if>
 
-		
-		
-		
-		
-		
+		<c:if test="${not empty requestScope.COURSES }">
+			<c:forEach var="course" items="${requestScope.COURSES}" >
+				<h2 class="thin">${course.getTitle()}</h2>
+				<p class="text-muted">${course.getContent()}</p>
+				<hr/>
+			</c:forEach>
+		</c:if>
 	</div>
 	
 
+
+<footer id="footer" class="top-space">
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contact</h3>
+						<div class="widget-body">
+							<p>+375 29 ### 64 38<br>
+								<a href="mailto:#">leha.shatskiy@gmail.com</a><br>
+								<br>
+								Minsk
+							</p>	
+						</div>
+					</div>
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Follow me</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons">
+								<a href=""><i class="fa fa-twitter fa-2"></i></a>
+								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
+								<a href=""><i class="fa fa-github fa-2"></i></a>
+								<a href=""><i class="fa fa-facebook fa-2"></i></a>
+							</p>	
+						</div>
+					</div>
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
 
 		<div class="footer2">
 			<div class="container">
@@ -117,7 +154,6 @@
 						Copyright &copy; 2017, Shatskiy Alex. 
 					</p>
 				</div>
-				
 			</div>
 		</div>
 

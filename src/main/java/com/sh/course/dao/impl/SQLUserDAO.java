@@ -1,12 +1,9 @@
 package com.sh.course.dao.impl;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -28,7 +25,6 @@ public class SQLUserDAO implements UserDAO {
 	private static final String HAS_EMAIL = "SELECT id FROM user WHERE email = ?"; 
 	private static final String HAS_NICKNAME = "SELECT id FROM user WHERE nickname = ?"; 
 	private static final String GET_USER_ID = "SELECT id FROM user WHERE email = ?";
-	private static final String GET_ALL_USER = "SELECT id, email, nickname, role FROM user";
 
 	@Override
 	public User signIn(String email, String password) throws ConnectionPoolException {
@@ -188,43 +184,6 @@ public class SQLUserDAO implements UserDAO {
 			CloseManager.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return passwordSQL;
-	}
-
-	@Override
-	public List<User> getAllUser(Integer courseId) throws ConnectionPoolException {
-
-		int user_id;
-		String email;
-		String nickname;
-		Role role;
-
-		List<User> users = new ArrayList<>();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-
-		ConnectionPool pool = ConnectionPool.getInstance();
-		connection = pool.takeConnection();
-		try {
-			preparedStatement = connection.prepareStatement(GET_ALL_USER);
-			resultSet = preparedStatement.executeQuery();
-
-			while (resultSet.next()) {
-				user_id = resultSet.getInt(1);
-				email = resultSet.getString(2);
-				nickname = resultSet.getString(3);
-				role = Role.valueOf(resultSet.getString(4));
-
-				User user = new User(user_id, email, nickname, role);
-				users.add(user);
-			}
-		} catch (SQLException e) {
-			log.error(e);
-			throw new ConnectionPoolException(e);
-		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
-		}
-		return users;
 	}
 
 	@Override

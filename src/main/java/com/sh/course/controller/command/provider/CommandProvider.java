@@ -9,6 +9,7 @@ import com.sh.course.controller.command.impl.CheckIn;
 import com.sh.course.controller.command.impl.PasswordRecovery;
 import com.sh.course.controller.command.impl.SignIn;
 import com.sh.course.controller.command.impl.SignOut;
+import com.sh.course.controller.command.impl.get.GetAvailableCourse;
 import com.sh.course.controller.command.impl.page.AddCoursePage;
 import com.sh.course.controller.command.impl.page.PasswordRecoveryPage;
 import com.sh.course.controller.command.impl.page.ProfilePage;
@@ -34,8 +35,8 @@ public class CommandProvider {
 		commands.put(CommandName.SIGN_IN_PAGE, new SignInPage());
 		commands.put(CommandName.ADD_COURSE_PAGE, new AddCoursePage());
 		
-		
-		
+		//get
+		commands.put(CommandName.GET_AVAILABLE_COURSE, new GetAvailableCourse());
 		
 	}
 

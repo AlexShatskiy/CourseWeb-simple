@@ -1,7 +1,5 @@
 package com.sh.course.service;
 
-import java.util.List;
-
 import com.sh.course.domain.User;
 import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
@@ -14,5 +12,4 @@ public interface UserService {
 	boolean hasNickname(String nickname) throws ServiceException, ServiceExceptionInvalidParameter;
 	boolean sendPassword(String email) throws ServiceException, ServiceExceptionInvalidParameter;
 	int getUserId(String email) throws ServiceException, ServiceExceptionInvalidParameter;
-	List<User> getAllUser() throws ServiceException;
 }

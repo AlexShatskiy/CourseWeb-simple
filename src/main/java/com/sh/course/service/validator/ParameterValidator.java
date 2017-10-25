@@ -5,6 +5,10 @@ import java.util.regex.Pattern;
 
 public final class ParameterValidator {
 	
+	private ParameterValidator() {
+		super();
+	}
+
 	private static String EMAIL_REGEXP = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
 
 	public static boolean isEmailValid(String email) {
@@ -37,5 +41,27 @@ public final class ParameterValidator {
 		}
 		return true;
 	}
-
+	
+	public static boolean isTextValid(String text) {
+		if (text == null) {
+			return false;
+		} else if (text.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean isIdValid(int id) {
+		if (id <= 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean isRatingValid(int rating) {
+		if (rating <= 0 || rating > 10) {
+			return false;
+		}
+		return true;
+	}
 }

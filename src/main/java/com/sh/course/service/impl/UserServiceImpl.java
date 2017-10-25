@@ -1,8 +1,5 @@
 package com.sh.course.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -136,14 +133,4 @@ public class UserServiceImpl implements UserService{
 		}
 		return userId;
 	}
-
-	@Override
-	public List<User> getAllUser() throws ServiceException {
-		List<User> users = new ArrayList<>();
-		
-		// TODO 
-		return users;
-	}
-	
-
 }

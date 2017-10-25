@@ -43,7 +43,6 @@ public class SignIn implements Command {
 
 		try {
 			user = userService.signIn(email, password);
-			System.out.println(user == null);
 			if (user == null) {
 				page = PageLibrary.SIGN_IN_PAGE;
 
@@ -67,10 +66,11 @@ public class SignIn implements Command {
 				}
 			}
 		} catch (ServiceException e) {
+			log.error(e);
 			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "sorry fail");
 			page = PageLibrary.INDEX;
 		} catch (ServiceExceptionInvalidParameter e) {
-			
+			log.error(e);
 			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "Invalid Parameter");
 			page = PageLibrary.INDEX;
 		}

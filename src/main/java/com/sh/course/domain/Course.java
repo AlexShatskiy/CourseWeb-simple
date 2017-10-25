@@ -10,6 +10,12 @@ public class Course {
 		super();
 	}
 	
+	public Course(String title, String content) {
+		super();
+		this.title = title;
+		this.content = content;
+	}
+	
 	public Course(Integer courseId, String title, String content) {
 		super();
 		this.courseId = courseId;
