@@ -20,4 +20,5 @@ public interface DiplomaDAO {
 	List<Course> getCourseFinish(int userId) throws ConnectionPoolException;
 	
 	Diploma getDiplomaCourse(int userId, int courseId) throws ConnectionPoolException;
+	boolean hasDiplomaCourse(int userId, int courseId) throws ConnectionPoolException;
 }

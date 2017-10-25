@@ -27,8 +27,10 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 
 	private static final String ENROLL_FOR_COURSE = "INSERT INTO diploma (user_id, course_id, lecturer_id, status) VALUES (?, ?, ?, ?);";
 	private static final String SET_RATE_STUDENT = "UPDATE diploma SET comment = ?, rating = ?, status = ? WHERE user_id = ? AND course_id = ? AND lecturer_id = ?";
-	private static final String GET_STUDENT_STUDY = "SELECT user_id, nickname FROM diploma INNER JOIN user ON diploma.user_id = user.id WHERE lecturer_id = 3 AND status = 'STUDY'";
-	
+	private static final String GET_STUDENT_STATUS = "SELECT user_id, nickname FROM diploma INNER JOIN user ON diploma.user_id = user.id WHERE lecturer_id = ? AND course_id = ? AND status = ?";
+	private static final String GET_COURSE_STATUS = "SELECT course_id, title, content FROM course INNER JOIN diploma ON diploma.course_id = course.id WHERE user_id = ? AND status = ?";
+	private static final String GET_DIPLOMA = "SELECT lecturer_id, comment, rating, status FROM diploma WHERE user_id = ? AND course_id = ?";
+	private static final String HES_DIPLOMA = "SELECT course_id FROM diploma WHERE user_id = ? AND course_id = ?";	
 	
 	private static final int RESULT_SUCCESS = 1;
 	
@@ -100,36 +102,219 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 
 	@Override
 	public List<User> getStudentStudy(int lecturerId, int courseId) throws ConnectionPoolException {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> students = new ArrayList<>();
+
+		Integer studentId = null;
+		String nickname = null;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.takeConnection();
+
+		try {
+			preparedStatement = connection.prepareStatement(GET_STUDENT_STATUS);
+			preparedStatement.setInt(1, lecturerId);
+			preparedStatement.setInt(2, courseId);
+			preparedStatement.setString(3, DiplomaStatus.STUDY.name());
+			
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				studentId = resultSet.getInt(1);
+				nickname = resultSet.getString(2);
+
+				students.add(new User(studentId, nickname));
+			}
+		} catch (SQLException e) {
+			throw new ConnectionPoolException(e);
+		} finally {
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+		}
+		return students;
 	}
 
 	@Override
 	public List<User> getStudentFinish(int lecturerId, int courseId) throws ConnectionPoolException {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> students = new ArrayList<>();
+
+		Integer studentId = null;
+		String nickname = null;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.takeConnection();
+
+		try {
+			preparedStatement = connection.prepareStatement(GET_STUDENT_STATUS);
+			preparedStatement.setInt(1, lecturerId);
+			preparedStatement.setInt(2, courseId);
+			preparedStatement.setString(3, DiplomaStatus.FINISH.name());
+			
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				studentId = resultSet.getInt(1);
+				nickname = resultSet.getString(2);
+
+				students.add(new User(studentId, nickname));
+			}
+		} catch (SQLException e) {
+			throw new ConnectionPoolException(e);
+		} finally {
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+		}
+		return students;
 	}
 
 	@Override
 	public List<Course> getCourseStudy(int userId) throws ConnectionPoolException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Course> courses = new ArrayList<>();
+
+		Integer courseId = null;
+		String title = null;
+		String content = null;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.takeConnection();
+
+		try {
+			preparedStatement = connection.prepareStatement(GET_COURSE_STATUS);
+
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setString(2, DiplomaStatus.STUDY.name());
+
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				courseId = resultSet.getInt(1);
+				title = resultSet.getString(2);
+				content = resultSet.getString(3);
+
+				courses.add(new Course(courseId, title, content));
+			}
+		} catch (SQLException e) {
+			throw new ConnectionPoolException(e);
+		} finally {
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+		}
+		return courses;
 	}
 
 	@Override
 	public List<Course> getCourseFinish(int userId) throws ConnectionPoolException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Course> courses = new ArrayList<>();
+
+		Integer courseId = null;
+		String title = null;
+		String content = null;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.takeConnection();
+
+		try {
+			preparedStatement = connection.prepareStatement(GET_COURSE_STATUS);
+
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setString(2, DiplomaStatus.FINISH.name());
+
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				courseId = resultSet.getInt(1);
+				title = resultSet.getString(2);
+				content = resultSet.getString(3);
+
+				courses.add(new Course(courseId, title, content));
+			}
+		} catch (SQLException e) {
+			throw new ConnectionPoolException(e);
+		} finally {
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+		}
+		return courses;
 	}
 
 	@Override
 	public Diploma getDiplomaCourse(int userId, int courseId) throws ConnectionPoolException {
-		// TODO Auto-generated method stub
-		return null;
+
+		Diploma diploma = null;
+		
+		Integer lecturerId = null;
+		String comment = null;
+		Integer rating = null;
+		DiplomaStatus status = null;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.takeConnection();
+
+		try {
+			preparedStatement = connection.prepareStatement(GET_DIPLOMA);
+
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(2, courseId);
+
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				lecturerId = resultSet.getInt(1);
+				comment = resultSet.getString(2);
+				rating = resultSet.getInt(3);
+				status = DiplomaStatus.valueOf(resultSet.getString(4));
+
+				diploma = new Diploma(userId, courseId, lecturerId, comment, rating, status);
+			}
+		} catch (SQLException e) {
+			throw new ConnectionPoolException(e);
+		} finally {
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+		}
+		return diploma;
 	}
-	
-	
-	
 
+	@Override
+	public boolean hasDiplomaCourse(int userId, int courseId) throws ConnectionPoolException {
+		
+		boolean isHasDiplomaCourse = false;
 
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		ConnectionPool pool = ConnectionPool.getInstance();
+		connection = pool.takeConnection();
+		try {
+			preparedStatement = connection.prepareStatement(HES_DIPLOMA);
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(2, courseId);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				isHasDiplomaCourse = true;
+			}
+
+		} catch (SQLException e) {
+			throw new ConnectionPoolException(e);
+		} finally {
+			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+		}
+		return isHasDiplomaCourse;
+	}
 }

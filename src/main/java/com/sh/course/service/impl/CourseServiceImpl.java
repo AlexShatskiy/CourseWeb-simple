@@ -11,13 +11,13 @@ import com.sh.course.dao.exception.DaoException;
 import com.sh.course.dao.factory.DAOFactory;
 import com.sh.course.domain.Course;
 import com.sh.course.service.CourseService;
-import com.sh.course.service.PatentService;
+import com.sh.course.service.DiplomaService;
 import com.sh.course.service.exception.ServiceException;
 
 public class CourseServiceImpl implements CourseService {
 	
 	private static final Logger log = LogManager.getRootLogger();
-
+/*
 	@Override
 	public void addCourse(String title, String content) throws ServiceException {
 		
@@ -44,7 +44,7 @@ public class CourseServiceImpl implements CourseService {
 		// TODO Auto-generated method stub
 		
 	}
-
+*/
 
 
 }

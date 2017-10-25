@@ -33,13 +33,13 @@ public class AddCourse implements Command {
 		
 		title = request.getParameter(PageParameter.TITLE);
 		content = request.getParameter(PageParameter.CONTENT);
-		
+		/*
 		try {
 			bookService.addCourse(title, content);
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		response.sendRedirect(URL_GOOD_ADD);
 	}
 }
