@@ -56,17 +56,17 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void addLecturerCourse(int userId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter {
+	public void addLecturerCourse(int lecturerId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
-		if (!ParameterValidator.isIdValid(userId) || !ParameterValidator.isIdValid(courseId)) {
+		if (!ParameterValidator.isIdValid(lecturerId) || !ParameterValidator.isIdValid(courseId)) {
 			throw new ServiceExceptionInvalidParameter();
 		}
 		
 		try {
-			courseDAO.addLecturerCourse(userId, courseId);
+			courseDAO.addLecturerCourse(lecturerId, courseId);
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -74,18 +74,18 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void deleteLecturerCourse(int userId, int courseId)
+	public void deleteLecturerCourse(int lecturerId, int courseId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
-		if (!ParameterValidator.isIdValid(userId) || !ParameterValidator.isIdValid(courseId)) {
+		if (!ParameterValidator.isIdValid(lecturerId) || !ParameterValidator.isIdValid(courseId)) {
 			throw new ServiceExceptionInvalidParameter();
 		}
 		
 		try {
-			courseDAO.deleteLecturerCourse(userId, courseId);
+			courseDAO.deleteLecturerCourse(lecturerId, courseId);
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
 			throw new ServiceException(e);

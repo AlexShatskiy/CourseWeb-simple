@@ -102,13 +102,13 @@
 	<!-- Intro -->
 	<div class="container text-center">
 		<br>
-		<c:if test="${empty requestScope.COURSES }">
+		<c:if test="${empty requestScope.CoursesAvailable}">
 			<h2 class="thin">##################################################</h2>
 			<p class="text-muted"><fmt:message key="login.label.username" /></p>
 		</c:if>
 
-		<c:if test="${not empty requestScope.COURSES }">
-			<c:forEach var="course" items="${requestScope.COURSES}" >
+		<c:if test="${not empty requestScope.coursesAvailable}">
+			<c:forEach var="course" items="${requestScope.coursesAvailable}" >
 				<h2 class="thin">${course.getTitle()}</h2>
 				<p class="text-muted">${course.getContent()}</p>
 				<hr/>

@@ -91,10 +91,13 @@
 				<header class="page-header">
 					<h1 class="page-title">About us</h1>
 				</header>
-				<h3>Lorem ipsum</h3>
-				<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente.</p>
-				<p>Quos, aliquam nam velit impedit minus tenetur beatae voluptas facere sint pariatur! Voluptatibus, quisquam, error, est assumenda corporis inventore illo nesciunt iure aut dolor possimus repellat minima veniam alias eius!</p>
-				
+					<c:if test="${not empty requestScope.coursesAvailable}">
+						<c:forEach var="course" items="${requestScope.coursesAvailable}" >
+							<h2 class="thin">${course.getTitle()}</h2>
+							<p class="text-muted">${course.getContent()}</p>
+							<hr/>
+						</c:forEach>
+					</c:if>
 				
 			</article>
 			<!-- /Article -->

@@ -88,12 +88,69 @@
 			
 			<!-- Article main content -->
 			<article class="col-sm-8 maincontent">
-
-				<h3>Lorem ipsum</h3>
-				<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente.</p>
-				<p>Quos, aliquam nam velit impedit minus tenetur beatae voluptas facere sint pariatur! Voluptatibus, quisquam, error, est assumenda corporis inventore illo nesciunt iure aut dolor possimus repellat minima veniam alias eius!</p>
-				
-				
+				<ol class="breadcrumb">
+					<li>
+						<c:if test="${not empty requestScope.errorMessage }">
+							<div class="alert alert-warning">
+								<c:out value="${requestScope.errorMessage}"></c:out>
+							</div>
+						</c:if>
+						<c:if test="${not empty requestScope.message }">
+							<div class="alert alert-success">
+								<c:out value="${requestScope.message}"></c:out>
+							</div>
+						</c:if>
+					</li>
+				</ol>
+			
+				<c:if test="${not empty requestScope.coursesAll }">
+					<c:forEach var="course" items="${requestScope.coursesAll}" >
+						<h2 class="thin">${course.getTitle()}</h2>
+						<p class="text-muted">${course.getContent()}</p>
+						<hr/>
+						<form method="post" action="controller">
+						 	<input type="hidden" name="command" value="ADD_LECTURER_COURSE" />
+						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+							<button type="submit" class="btn">
+								ADD LECTURER COURSE
+							</button>
+						</form>
+					</c:forEach>
+				</c:if>
+				<c:if test="${not empty requestScope.coursesLecturer }">
+					<c:forEach var="course" items="${requestScope.coursesLecturer}" >
+						<h2 class="thin">${course.getTitle()}</h2>
+						<p class="text-muted">${course.getContent()}</p>
+						<hr/>
+						<form method="post" action="controller">
+						 	<input type="hidden" name="command" value="DELETE_LECTURER_COURSE" />
+						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+							<button type="submit" class="btn">
+								DELETE LECTURER COURSE
+							</button>
+						</form>
+					</c:forEach>
+				</c:if>
+				<c:if test="${not empty requestScope.coursesAvailable}">
+					<c:forEach var="course" items="${requestScope.coursesAvailable}" >
+						<h2 class="thin">${course.getTitle()}</h2>
+						<p class="text-muted">${course.getContent()}</p>
+						<hr/>
+						<form method="get" action="controller">
+						 	<input type="hidden" name="command" value="GET_ALL_LECTURER_COURSE" />
+						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+							<button type="submit" class="btn">
+								LECTURERS
+							</button>
+						</form>
+					</c:forEach>
+				</c:if>
+				<c:if test="${not empty requestScope.lecturersCourse}">
+					<c:forEach var="lecturer" items="${requestScope.lecturersCourse}" >
+						<h2 class="thin">${lecturer.getNickname()}</h2>
+						<hr/>
+					</c:forEach>
+				</c:if>
 			</article>
 			<!-- /Article -->
 			
@@ -101,8 +158,23 @@
 			<aside class="col-sm-4 sidebar sidebar-right">
 
 				<div class="widget">
-					<h4>Control Panel</h4>
+					<form  method="get" action="controller">
+						<input type="hidden" name="command" value="SEARCH_AVAILABLE_COURSE" /> 
+				  		<input type="text" name="titleOrContent" class="form-control">
+				  		
+						<button type="submit" class="btn">SEARCH</button>
+					</form>
+					<hr>
+
 					<ul class="list-unstyled list-spaces">
+						<li>
+							<form method="get" action="controller">
+							 	<input type="hidden" name="command" value="PROFILE_PAGE" /> 
+								<button type="submit" class="btn">
+									ALL COURSE
+								</button>
+							</form>
+						</li>
 						<li>
 							<form method="get" action="controller">
 							 	<input type="hidden" name="command" value="ADD_COURSE_PAGE" /> 
@@ -110,11 +182,29 @@
 									ADD COURSE
 								</button>
 							</form>
-						
-						
 						</li>
-						
+						<li>
+							<form method="get" action="controller">
+							 	<input type="hidden" name="command" value="GET_ALL_COURSE_LECTURER" /> 
+								<button type="submit" class="btn">
+									GET ALL COURSE LECTURER
+								</button>
+							</form>
+						</li>
+						<li>
+							<form method="get" action="controller">
+							 	<input type="hidden" name="command" value="GET_AVAILABLE_COURSE" /> 
+								<button type="submit" class="btn">
+									GET AVAILABLE COURSE
+								</button>
+							</form>
+						</li>
 					</ul>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
 				</div>
 
 			</aside>

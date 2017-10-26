@@ -98,7 +98,7 @@
 						<div class="panel-body">
 							<h3 class="thin text-center">Sign in to your account</h3>
 							<hr>						
-							<form form method="post" action="controller">
+							<form method="post" action="controller">
 								<input type="hidden" name="command" value="SIGN_IN" />
 								<div class="top-margin">
 									<label>Username/Email <span class="text-danger">*</span></label>
@@ -113,6 +113,7 @@
 									<button class="btn btn-action" type="submit">Sign in</button>
 								</div>
 							</form>
+							<br>
 							<hr>
 
 							<div class="row">
@@ -199,7 +200,7 @@
 			<div class="container">
 				<div class="widget-body">
 					<p class="text">
-						Copyright &copy; 2017, Shatskiy Alex. 
+						Copyright &copy; 2017, Shatskiy Alex.
 					</p>
 				</div>
 			</div>

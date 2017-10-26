@@ -33,7 +33,6 @@ public class CheckIn implements Command {
 		String nickname;
 
 		User user;
-		String page;
 
 		email = request.getParameter(PageParameter.EMAIL);
 		password = request.getParameter(PageParameter.PASSWORD);
@@ -45,7 +44,6 @@ public class CheckIn implements Command {
 		try {
 			user = userService.checkIn(email, password, nickname);
 			if (user == null) {
-				page = PageLibrary.REGISTRATION_PAGE;
 
 				if (userService.hasEmail(email)) {
 					request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "There is such a user " + email);
@@ -54,7 +52,7 @@ public class CheckIn implements Command {
 				} else {
 					request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "Try another email or nickname");
 				}
-				RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.REGISTRATION_PAGE);
 				dispatcher.forward(request, response);
 
 			} else {
@@ -64,15 +62,13 @@ public class CheckIn implements Command {
 				session.setAttribute(SessionAttribute.ROLE, user.getRole());
 				session.setAttribute(SessionAttribute.NICKNAME, user.getNickname());
 
-				response.sendRedirect(PageLibrary.INDEX);
+				response.sendRedirect(PageLibrary.URL_USER_PROFILE);
 			}
 		} catch (ServiceException e) {
 			log.error(e);
-			page = PageLibrary.INDEX;
 			response.sendRedirect(PageLibrary.INDEX);
 		} catch (ServiceExceptionInvalidParameter e) {
 			log.error(e);
-			page = PageLibrary.INDEX;
 			response.sendRedirect(PageLibrary.INDEX);
 		}
 	}

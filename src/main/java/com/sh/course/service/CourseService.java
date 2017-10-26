@@ -11,8 +11,8 @@ import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 public interface CourseService {
 
 	void addCourse(String title, String content) throws ServiceException, ServiceExceptionInvalidParameter;
-	void addLecturerCourse(int userId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
-	void deleteLecturerCourse(int userId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
+	void addLecturerCourse(int lecturerId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
+	void deleteLecturerCourse(int lecturerId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
 	
 	List<Course> getAllCourse() throws ServiceException;
 	List<Course> getAvailableCourse() throws ServiceException;

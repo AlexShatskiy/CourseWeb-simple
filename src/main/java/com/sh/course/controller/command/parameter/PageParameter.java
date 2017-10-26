@@ -10,5 +10,9 @@ public final class PageParameter {
 	public static final String TITLE = "title";
 	public static final String CONTENT = "content";
 	
-
+	public static final String USER_ID = "userId";
+	public static final String LECTURER_ID = "lecturerId";
+	public static final String COURSE_ID = "courseId";
+	
+	public static final String TITLE_OR_CONTENT = "titleOrContent";
 }

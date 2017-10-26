@@ -4,17 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.sh.course.controller.command.Command;
-import com.sh.course.controller.command.impl.AddCourse;
 import com.sh.course.controller.command.impl.CheckIn;
 import com.sh.course.controller.command.impl.PasswordRecovery;
 import com.sh.course.controller.command.impl.SignIn;
 import com.sh.course.controller.command.impl.SignOut;
+import com.sh.course.controller.command.impl.get.GetAllCourseLecturer;
+import com.sh.course.controller.command.impl.get.GetAllLecturerCourse;
 import com.sh.course.controller.command.impl.get.GetAvailableCourse;
+import com.sh.course.controller.command.impl.get.SearcAvailableCourse;
 import com.sh.course.controller.command.impl.page.AddCoursePage;
 import com.sh.course.controller.command.impl.page.PasswordRecoveryPage;
 import com.sh.course.controller.command.impl.page.ProfilePage;
 import com.sh.course.controller.command.impl.page.RegistrationPage;
 import com.sh.course.controller.command.impl.page.SignInPage;
+import com.sh.course.controller.command.impl.post.AddCourse;
+import com.sh.course.controller.command.impl.post.AddLecturerCourse;
+import com.sh.course.controller.command.impl.post.DeleteLecturerCourse;
+import com.sh.course.controller.command.impl.result.BedAddCourse;
+import com.sh.course.controller.command.impl.result.BedAddHasTitleCourse;
+import com.sh.course.controller.command.impl.result.BedAddInvalidCourse;
+import com.sh.course.controller.command.impl.result.BedAddLecturerCourse;
+import com.sh.course.controller.command.impl.result.BedDeleteLecturerCourse;
+import com.sh.course.controller.command.impl.result.GoodAddCourse;
+import com.sh.course.controller.command.impl.result.GoodAddLecturerCourse;
+import com.sh.course.controller.command.impl.result.GoodDeleteLecturerCourse;
 import com.sh.course.controller.command.parameter.CommandName;
 
 public class CommandProvider {
@@ -36,7 +49,26 @@ public class CommandProvider {
 		commands.put(CommandName.ADD_COURSE_PAGE, new AddCoursePage());
 		
 		//get
+		commands.put(CommandName.SEARCH_AVAILABLE_COURSE, new SearcAvailableCourse());
 		commands.put(CommandName.GET_AVAILABLE_COURSE, new GetAvailableCourse());
+		commands.put(CommandName.GET_ALL_COURSE_LECTURER, new GetAllCourseLecturer());
+		
+		//result added course
+		commands.put(CommandName.GOOD_ADD_COURSE, new GoodAddCourse());
+		commands.put(CommandName.BED_ADD_COURSE, new BedAddCourse());
+		commands.put(CommandName.BED_ADD_HAS_TITLE_COURSE, new BedAddHasTitleCourse());
+		commands.put(CommandName.BED_ADD_INVALID_COURSE, new BedAddInvalidCourse());
+		
+		commands.put(CommandName.ADD_LECTURER_COURSE, new AddLecturerCourse());
+		commands.put(CommandName.DELETE_LECTURER_COURSE, new DeleteLecturerCourse());
+		
+		commands.put(CommandName.GOOD_ADD_LECTURER_COURSE, new GoodAddLecturerCourse());
+		commands.put(CommandName.BED_ADD_LECTURER_COURSE, new BedAddLecturerCourse());
+		commands.put(CommandName.GOOD_DELETE_LECTURER_COURSE, new GoodDeleteLecturerCourse());
+		commands.put(CommandName.BED_DELETE_LECTURER_COURSE, new BedDeleteLecturerCourse());
+		
+		commands.put(CommandName.GET_ALL_LECTURER_COURSE, new GetAllLecturerCourse());
+		
 		
 	}
 

@@ -18,6 +18,11 @@ import com.sh.course.dao.exception.ConnectionPoolException;
 
 public class Controller extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger log = LogManager.getRootLogger();
 
 	private static final CommandProvider provider = new CommandProvider();

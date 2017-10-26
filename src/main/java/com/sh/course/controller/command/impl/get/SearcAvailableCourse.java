@@ -1,4 +1,4 @@
-package com.sh.course.controller.command.impl.page;
+package com.sh.course.controller.command.impl.get;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,50 +15,53 @@ import org.apache.log4j.Logger;
 
 import com.sh.course.controller.command.Command;
 import com.sh.course.controller.command.parameter.PageLibrary;
+import com.sh.course.controller.command.parameter.PageParameter;
 import com.sh.course.controller.command.parameter.PageSetAttribute;
 import com.sh.course.controller.command.parameter.SessionAttribute;
 import com.sh.course.domain.Course;
 import com.sh.course.domain.parameter.Role;
 import com.sh.course.service.CourseService;
 import com.sh.course.service.exception.ServiceException;
+import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.factory.ServiceFactory;
 
-public class ProfilePage implements Command {
-
+public class SearcAvailableCourse implements Command {
+	
 	private static final Logger log = LogManager.getRootLogger();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		List<Course> courses = new ArrayList<>();
-
-		ServiceFactory factory = ServiceFactory.getInstance();
-		CourseService courseService = factory.getCourseService();
-
+		
+		String text;
 		String page;
 		Role role;
 
 		HttpSession session = request.getSession(true);
 		role = (Role) session.getAttribute(SessionAttribute.ROLE);
-
+		
 		if (Role.LECTURER.equals(role)) {
-			try {
-				courses = courseService.getAllCourse();
-			} catch (ServiceException e) {
-				log.error(e);
-			}
-			request.setAttribute(PageSetAttribute.COURSES_ALL, courses);
 			page = PageLibrary.LECTURER_PROFILE;
 		} else {
-			try {
-				courses = courseService.getAvailableCourse();
-			} catch (ServiceException e) {
-				log.error(e);
-			}
-			request.setAttribute(PageSetAttribute.COURSES_AVAILABLE, courses);
 			page = PageLibrary.USER_PROFILE;
 		}
 		
+		ServiceFactory factory = ServiceFactory.getInstance();
+		CourseService courseService = factory.getCourseService();
+		
+		text = request.getParameter(PageParameter.TITLE_OR_CONTENT);
+		
+		try {
+			courses = courseService.searchAvailableCourse(text);
+			request.setAttribute(PageSetAttribute.COURSES_AVAILABLE, courses);
+		} catch (ServiceException e) {
+			log.error(e);
+			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "sorry fail");
+		} catch (ServiceExceptionInvalidParameter e) {
+			log.error(e);
+			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "invalid parameter");
+		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}

@@ -85,6 +85,11 @@
 						<c:out value="${requestScope.errorMessage}"></c:out>
 					</div>
 				</c:if>
+				<c:if test="${not empty requestScope.message }">
+					<div class="alert alert-success">
+						<c:out value="${requestScope.message}"></c:out>
+					</div>
+				</c:if>
 			</li>
 		</ol>
 
@@ -98,15 +103,15 @@
 						<div class="panel-body">
 							<h3 class="thin text-center">Add course</h3>
 							<hr>						
-							<form form method="post" action="controller">
+							<form method="post" action="controller">
 								<input type="hidden" name="command" value="ADD_COURSE" />
 								<div class="top-margin">
 									<label>Title <span class="text-danger">*</span></label>
-									<textarea name="title" cols = "50" rows="1" class="form-control" required="required"></textarea></p>
+									<textarea name="title" cols = "50" rows="1" class="form-control"></textarea>
 								</div>
 								<div class="top-margin">
 									<label>Content <span class="text-danger">*</span></label>
-									<textarea name="content" cols = "50" rows="7" class="form-control" required="required"></textarea>
+									<textarea name="content" cols = "50" rows="7" class="form-control"></textarea>
 								</div>
 							<hr>
 								<div class="col-lg-4 text-right">
@@ -163,9 +168,6 @@
 
 	</footer>	
 		
-
-
-
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

@@ -17,7 +17,6 @@ import com.sh.course.controller.command.parameter.PageParameter;
 import com.sh.course.controller.command.parameter.PageSetAttribute;
 import com.sh.course.controller.command.parameter.SessionAttribute;
 import com.sh.course.domain.User;
-import com.sh.course.domain.parameter.Role;
 import com.sh.course.service.UserService;
 import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
@@ -33,7 +32,6 @@ public class SignIn implements Command {
 		String email;
 		String password;
 		User user;
-		String page;
 
 		email = request.getParameter(PageParameter.EMAIL);
 		password = request.getParameter(PageParameter.PASSWORD);
@@ -44,13 +42,15 @@ public class SignIn implements Command {
 		try {
 			user = userService.signIn(email, password);
 			if (user == null) {
-				page = PageLibrary.SIGN_IN_PAGE;
 
 				if (userService.hasEmail(email)) {
 					request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "Wrong password " + email);
 				} else {
 					request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "No user " + email);
 				}
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.SIGN_IN_PAGE);
+				dispatcher.forward(request, response);
 
 			} else {
 
@@ -59,23 +59,20 @@ public class SignIn implements Command {
 				session.setAttribute(SessionAttribute.ROLE, user.getRole());
 				session.setAttribute(SessionAttribute.NICKNAME, user.getNickname());
 
-				if (Role.LECTURER.equals(user.getRole())) {
-					page = PageLibrary.LECTURER_PROFILE;
-				} else {
-					page = PageLibrary.USER_PROFILE;
-				}
+				response.sendRedirect(PageLibrary.URL_USER_PROFILE);
 			}
 		} catch (ServiceException e) {
 			log.error(e);
 			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "sorry fail");
-			page = PageLibrary.INDEX;
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.SIGN_IN_PAGE);
+			dispatcher.forward(request, response);
 		} catch (ServiceExceptionInvalidParameter e) {
 			log.error(e);
 			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "Invalid Parameter");
-			page = PageLibrary.INDEX;
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.SIGN_IN_PAGE);
+			dispatcher.forward(request, response);
 		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request, response);
 	}
 }
