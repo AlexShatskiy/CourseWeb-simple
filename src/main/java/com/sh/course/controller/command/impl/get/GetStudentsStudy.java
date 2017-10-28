@@ -1,7 +1,6 @@
 package com.sh.course.controller.command.impl.get;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,51 +17,40 @@ import com.sh.course.controller.command.parameter.PageLibrary;
 import com.sh.course.controller.command.parameter.PageParameter;
 import com.sh.course.controller.command.parameter.PageSetAttribute;
 import com.sh.course.controller.command.parameter.SessionAttribute;
-import com.sh.course.domain.Course;
-import com.sh.course.domain.parameter.Role;
-import com.sh.course.service.CourseService;
+import com.sh.course.domain.User;
+import com.sh.course.service.DiplomaService;
 import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.factory.ServiceFactory;
 
-public class SearcAvailableCourse implements Command {
+public class GetStudentsStudy implements Command {
 	
 	private static final Logger log = LogManager.getRootLogger();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Course> courses = new ArrayList<>();
-		
-		String text;
-		String page;
-		Role role;
-
-		HttpSession session = request.getSession(true);
-		role = (Role) session.getAttribute(SessionAttribute.ROLE);
-		
-		if (Role.LECTURER.equals(role)) {
-			page = PageLibrary.LECTURER_PROFILE;
-		} else {
-			page = PageLibrary.USER_PROFILE;
-		}
+		List<User> students;
+		int lecturerId;
+		int courseId;
 		
 		ServiceFactory factory = ServiceFactory.getInstance();
-		CourseService courseService = factory.getCourseService();
+		DiplomaService diplomaService = factory.getDiplomaService();
 		
-		text = request.getParameter(PageParameter.TITLE_OR_CONTENT);
+		HttpSession session = request.getSession(true);
+
+		lecturerId = (Integer) session.getAttribute(SessionAttribute.USER_ID);
+		courseId = Integer.parseInt(request.getParameter(PageParameter.COURSE_ID));
 		
 		try {
-			courses = courseService.searchAvailableCourse(text);
-			request.setAttribute(PageSetAttribute.COURSES_AVAILABLE, courses);
-		} catch (ServiceException e) {
+			students = diplomaService.getStudentStudy(lecturerId, courseId);
+			request.setAttribute(PageSetAttribute.STUDENTS_STUDY, students);
+			request.setAttribute(PageSetAttribute.COURSE_ID, courseId);
+			request.setAttribute(PageSetAttribute.TITLE, request.getParameter(PageParameter.TITLE));
+		} catch (ServiceException | ServiceExceptionInvalidParameter e) {
 			log.error(e);
-			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "sorry fail");
-		} catch (ServiceExceptionInvalidParameter e) {
-			log.error(e);
-			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "invalid parameter");
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(PageLibrary.LECTURER_PROFILE);
 		dispatcher.forward(request, response);
 	}
 }

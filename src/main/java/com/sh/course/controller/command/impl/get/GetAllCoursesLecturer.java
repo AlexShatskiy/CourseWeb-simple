@@ -18,50 +18,63 @@ import com.sh.course.controller.command.parameter.PageLibrary;
 import com.sh.course.controller.command.parameter.PageParameter;
 import com.sh.course.controller.command.parameter.PageSetAttribute;
 import com.sh.course.controller.command.parameter.SessionAttribute;
-import com.sh.course.domain.User;
+import com.sh.course.domain.Course;
 import com.sh.course.domain.parameter.Role;
 import com.sh.course.service.CourseService;
 import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.factory.ServiceFactory;
 
-public class GetAllLecturerCourse implements Command  {
-	
+public class GetAllCoursesLecturer implements Command {
+
 	private static final Logger log = LogManager.getRootLogger();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<User> lecturers = new ArrayList<>();
-		
+
+		List<Course> courses = new ArrayList<>();
+
 		ServiceFactory factory = ServiceFactory.getInstance();
 		CourseService courseService = factory.getCourseService();
 
 		String page;
 		Role role;
-		int courseId;
-		
+		int lecturerId;
+		String pageSetAttribute;
+
 		HttpSession session = request.getSession(true);
 		role = (Role) session.getAttribute(SessionAttribute.ROLE);
-
-		courseId = Integer.parseInt(request.getParameter(PageParameter.COURSE_ID));
 		
+		Integer sessionId = (Integer) session.getAttribute(SessionAttribute.USER_ID);
+		String pageLecturerId = request.getParameter(PageParameter.LECTURER_ID);
+
 		if (Role.LECTURER.equals(role)) {
+
+			if (pageLecturerId == null) {
+				lecturerId = sessionId;
+				pageSetAttribute = PageSetAttribute.COURSES_LECTURER;
+			} else if (sessionId.equals(Integer.parseInt(pageLecturerId))){
+				lecturerId = sessionId;
+				pageSetAttribute = PageSetAttribute.COURSES_LECTURER;
+			} else {
+				lecturerId = Integer.parseInt(pageLecturerId);
+				pageSetAttribute = PageSetAttribute.COURSES_AVAILABLE;
+			}
 			page = PageLibrary.LECTURER_PROFILE;
 		} else {
+			lecturerId = Integer.parseInt(pageLecturerId);
 			page = PageLibrary.USER_PROFILE;
+			pageSetAttribute = PageSetAttribute.COURSES_AVAILABLE;
 		}
-		
 		try {
-			lecturers = courseService.getAllLecturerCourse(courseId);
+			courses = courseService.getAllCourseLecturer(lecturerId);
 		} catch (ServiceException e) {
 			log.error(e);
-			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "Sorry you can not see the course lecturers");
 		} catch (ServiceExceptionInvalidParameter e) {
 			log.error(e);
-			request.setAttribute(PageSetAttribute.ERROR_MESSAGE, "Invalid parameter");
 		}
-
-		request.setAttribute(PageSetAttribute.LECTURERS_COURSE, lecturers);
+		
+		request.setAttribute(pageSetAttribute, courses);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);

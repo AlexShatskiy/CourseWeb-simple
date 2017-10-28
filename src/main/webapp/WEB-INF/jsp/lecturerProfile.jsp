@@ -79,11 +79,6 @@
 	<!-- container -->
 	<div class="container">
 
-		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
-			<li class="active">About</li>
-		</ol>
-
 		<div class="row">
 			
 			<!-- Article main content -->
@@ -122,13 +117,37 @@
 						<h2 class="thin">${course.getTitle()}</h2>
 						<p class="text-muted">${course.getContent()}</p>
 						<hr/>
-						<form method="post" action="controller">
-						 	<input type="hidden" name="command" value="DELETE_LECTURER_COURSE" />
-						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
-							<button type="submit" class="btn">
-								DELETE LECTURER COURSE
-							</button>
-						</form>
+						<ul class="nav navbar-nav pull-right">
+							<li>
+								<form method="post" action="controller">
+								 	<input type="hidden" name="command" value="DELETE_LECTURER_COURSE" />
+								 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+									<button type="submit" class="btn">
+										DELETE LECTURER COURSE
+									</button>
+								</form>
+							</li>
+							<li>
+								<form method="get" action="controller">
+								 	<input type="hidden" name="command" value="GET_STUDENT_STUDY" />
+								 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+								 	<input type="hidden" name="title" value="${course.getTitle()}" />
+									<button type="submit" class="btn">
+										STUDENT STUDY
+									</button>
+								</form>
+							</li>
+							<li>
+								<form method="get" action="controller">
+								 	<input type="hidden" name="command" value="GET_STUDENT_FINISH" />
+								 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+								 	<input type="hidden" name="title" value="${course.getTitle()}" />
+									<button type="submit" class="btn">
+										STUDENT FINISH
+									</button>
+								</form>
+							</li>
+						</ul>
 					</c:forEach>
 				</c:if>
 				<c:if test="${not empty requestScope.coursesAvailable}">
@@ -139,16 +158,75 @@
 						<form method="get" action="controller">
 						 	<input type="hidden" name="command" value="GET_ALL_LECTURER_COURSE" />
 						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+						 	<input type="hidden" name="title" value="${course.getTitle()}" />
 							<button type="submit" class="btn">
-								LECTURERS
+								ENROLL COURSE LECTURERS
 							</button>
 						</form>
 					</c:forEach>
 				</c:if>
 				<c:if test="${not empty requestScope.lecturersCourse}">
+					<h2>${requestScope.title}</h2>
+					<hr/>
 					<c:forEach var="lecturer" items="${requestScope.lecturersCourse}" >
 						<h2 class="thin">${lecturer.getNickname()}</h2>
 						<hr/>
+						<ul class="nav navbar-nav pull-right">
+							<li>
+								<form method="get" action="controller">
+								 	<input type="hidden" name="command" value="GET_ALL_COURSE_LECTURER" /> 
+								 	<input type="hidden" name="lecturerId" value="${lecturer.getUserId()}" /> 
+									<button type="submit" class="btn">
+										GET ALL COURSES LECTURER
+									</button>
+								</form>
+							</li>
+							<li>
+								<form method="post" action="controller">
+								 	<input type="hidden" name="command" value="ENROLL_FOR_COURSE" /> 
+								 	<input type="hidden" name="lecturerId" value="${lecturer.getUserId()}" />
+								 	<input type="hidden" name="courseId" value="${requestScope.courseId}" /> 
+									<button type="submit" class="btn">
+										ENROLL
+									</button>
+								</form>
+							</li>
+						</ul>
+					</c:forEach>
+				</c:if>
+				<c:if test="${not empty requestScope.studentsStudy}">
+					<h2>${requestScope.title}</h2>
+					<hr/>
+					<c:forEach var="student" items="${requestScope.studentsStudy}" >
+						<h2 class="thin">${student.getNickname()}</h2>
+						<hr/>
+						<ul class="nav navbar-nav pull-right">
+							<li>
+								<form method="post" action="controller">
+								 	<input type="hidden" name="command" value="RATE_STUDENT_PAGE" /> 
+								 	<input type="hidden" name="userId" value="${student.getUserId()}" />
+								 	<input type="hidden" name="courseId" value="${requestScope.courseId}" />
+								 	<input type="hidden" name="title" value="${requestScope.title}" /> 
+								 	<input type="hidden" name="nickname" value="${student.getNickname()}" /> 
+									<button type="submit" class="btn">
+										RATE_PAGE
+									</button>
+								</form>
+							</li>
+						</ul>
+					</c:forEach>
+				</c:if>
+				<c:if test="${not empty requestScope.studentsFinish}">
+					<h2>${requestScope.title}</h2>
+					<hr/>
+					<c:forEach var="student" items="${requestScope.studentsFinish}" >
+						<h2 class="thin">${student.getNickname()}</h2>
+						<hr/>
+						<ul class="nav navbar-nav pull-right">
+							<li>
+								
+							</li>
+						</ul>
 					</c:forEach>
 				</c:if>
 			</article>

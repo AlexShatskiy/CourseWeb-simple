@@ -95,18 +95,8 @@
 								<div class="top-margin">
 									<label>Email <span class="text-danger">*</span></label>
 									<input type="email" name="email" class="form-control" required="required">
-								</div>
-								<hr>
-
-								<div class="row">
-									<div class="col-lg-8">
-
-									</div>
-								
-									
-									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Send password</button>
-									</div>
+									<hr>
+									<button class="btn btn-action" type="submit">Send password</button>
 								</div>
 							</form>
 						</div>

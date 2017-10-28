@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 	
-	<title>signIn</title>
+	<title>rate</title>
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
@@ -78,15 +78,6 @@
 
 	<!-- container -->
 	<div class="container">
-		<ol class="breadcrumb">
-			<li>
-				<c:if test="${not empty requestScope.errorMessage }">
-					<div class="alert alert-warning">
-						<c:out value="${requestScope.errorMessage}"></c:out>
-					</div>
-				</c:if>
-			</li>
-		</ol>
 
 		<div class="row">
 			
@@ -96,92 +87,46 @@
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<h3 class="thin text-center">Sign in to your account</h3>
-							<hr>						
-							<form method="post" action="controller">
-								<input type="hidden" name="command" value="SIGN_IN" />
-								<div class="top-margin">
-									<label>Username/Email <span class="text-danger">*</span></label>
-									<input type="email" name="email" class="form-control" required="required">
-								</div>
-								<div class="top-margin">
-									<label>Password <span class="text-danger">*</span></label>
-									<input type="password" name="password" class="form-control" required="required">
-								</div>
+							<h3 class="thin text-center">RATE</h3>
+							<p>Student: ${requestScope.nickname}</p>
+							<br>
+							<p>Course: ${requestScope.title}</p>
 							<hr>
-								<div class="col-lg-4 text-right">
-									<button class="btn btn-action" type="submit">Sign in</button>
+							<form method="post" action="controller">
+								<input type="hidden" name="command" value="RATE_STUDENT" />
+								<div class="top-margin">
+									<label>Comment <span class="text-danger">*</span></label>
+									<textarea name="comment" cols = "50" rows="7" class="form-control"></textarea>
+									<hr>
+									<label>Rate <span class="text-danger">*</span></label>
+										<input type="radio" name="rating" value="1" /> 1
+										<input type="radio" name="rating" value="2" /> 2
+										<input type="radio" name="rating" value="3" /> 3
+										<input type="radio" name="rating" value="4" /> 4
+										<input type="radio" name="rating" value="5" /> 5
+										<input type="radio" name="rating" value="6" /> 6
+										<input type="radio" name="rating" value="7" /> 7
+										<input type="radio" name="rating" value="8" /> 8
+										<input type="radio" name="rating" value="9" /> 9
+										<input type="radio" name="rating" value="10" /> 10
+									<hr>
+									<input type="hidden" name="courseId" value="${requestScope.courseId}" />
+									<input type="hidden" name="userId" value="${requestScope.userId}" />
+									<button class="btn btn-action" type="submit">RATE</button>
 								</div>
 							</form>
-							<br>
-							<hr>
-
-							<div class="row">
-								<div class="col-md-6">
-									<form method="get" action="controller">
-									 	<input type="hidden" name="command" value="PASSWORD_RECOVERY_PAGE" /> 
-										<button type="submit" class="btn-link">
-											Forgot password?
-										</button>
-									</form>
-								</div>
-								<div class="col-md-6">
-									<form method="get" action="controller">
-									 	<input type="hidden" name="command" value="REGISTRATION_PAGE" /> 
-										<button type="submit" class="btn-link">
-											registration
-										</button>
-									</form>
-								</div>
-							</div>
-
 						</div>
 					</div>
-				</div>	
+
+				</div>
+				
 			</article>
 			<!-- /Article -->
-		</div>
-		
-		
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="lect1@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass1" />
-				<button type="submit" class="btn-link">
-					lect1
-				</button>
-			</form>
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="lect2@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass2" />
-				<button type="submit" class="btn-link">
-					lect2
-				</button>
-			</form>
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="stud4@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass4" />
-				<button type="submit" class="btn-link">
-					stud4
-				</button>
-			</form>
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="stud5@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass5" />
-				<button type="submit" class="btn-link">
-					stud5
-				</button>
-			</form>
-		
-		
-		
-		
 
+		</div>
 	</div>	<!-- /container -->
 	
+
 	<footer id="footer" class="top-space">
 		<div class="footer1">
 			<div class="container">
@@ -215,7 +160,7 @@
 			<div class="container">
 				<div class="widget-body">
 					<p class="text">
-						Copyright &copy; 2017, Shatskiy Alex.
+						Copyright &copy; 2017, Shatskiy Alex. 
 					</p>
 				</div>
 			</div>

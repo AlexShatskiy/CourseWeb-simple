@@ -29,7 +29,8 @@ public class DiplomaServiceImpl implements DiplomaService {
 		DAOFactory factory = DAOFactory.getInstance();
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
 		
-		if (!ParameterValidator.isIdValid(userId) || !ParameterValidator.isIdValid(courseId) || !ParameterValidator.isIdValid(lecturerId)) {
+		if (!ParameterValidator.isIdValid(userId) || !ParameterValidator.isIdValid(courseId) 
+				|| !ParameterValidator.isIdValid(lecturerId) || userId == lecturerId) {
 			throw new ServiceExceptionInvalidParameter();
 		}
 		

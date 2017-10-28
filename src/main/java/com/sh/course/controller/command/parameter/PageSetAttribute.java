@@ -10,5 +10,12 @@ public class PageSetAttribute {
 	public static final String COURSES_LECTURER = "coursesLecturer";
 	
 	public static final String LECTURERS_COURSE = "lecturersCourse";
-
+	
+	public static final String TITLE = "title";
+	public static final String COURSE_ID = "courseId";
+	public static final String USER_ID = "userId";
+	public static final String NICKNAME = "nickname";
+	
+	public static final String STUDENTS_STUDY = "studentsStudy";
+	public static final String STUDENTS_FINISH = "studentsFinish";
 }
