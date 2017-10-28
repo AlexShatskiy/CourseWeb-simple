@@ -39,12 +39,12 @@ public class GetAllLecturersCourse implements Command  {
 
 		String page;
 		Role role;
-		int courseId;
+		String courseId;
 		
 		HttpSession session = request.getSession(true);
 		role = (Role) session.getAttribute(SessionAttribute.ROLE);
 
-		courseId = Integer.parseInt(request.getParameter(PageParameter.COURSE_ID));
+		courseId = request.getParameter(PageParameter.COURSE_ID);
 		
 		if (Role.LECTURER.equals(role)) {
 			page = PageLibrary.LECTURER_PROFILE;

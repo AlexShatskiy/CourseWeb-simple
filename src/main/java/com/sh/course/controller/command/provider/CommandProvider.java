@@ -32,10 +32,12 @@ import com.sh.course.controller.command.impl.result.BedAddLecturerCourse;
 import com.sh.course.controller.command.impl.result.BedDeleteLecturerCourse;
 import com.sh.course.controller.command.impl.result.BedEnrollForCourse;
 import com.sh.course.controller.command.impl.result.BedEnrollForCourseHas;
+import com.sh.course.controller.command.impl.result.BedRating;
 import com.sh.course.controller.command.impl.result.GoodAddCourse;
 import com.sh.course.controller.command.impl.result.GoodAddLecturerCourse;
 import com.sh.course.controller.command.impl.result.GoodDeleteLecturerCourse;
 import com.sh.course.controller.command.impl.result.GoodEnrollForCourse;
+import com.sh.course.controller.command.impl.result.GoodRating;
 import com.sh.course.controller.command.parameter.CommandName;
 
 public class CommandProvider {
@@ -87,6 +89,8 @@ public class CommandProvider {
 		
 		commands.put(CommandName.RATE_STUDENT_PAGE, new RateStudentPage());
 		commands.put(CommandName.RATE_STUDENT, new RateStudent());
+		commands.put(CommandName.GOOD_RATING, new GoodRating());
+		commands.put(CommandName.BED_RATING, new BedRating());
 	}
 
 	public Command getCommand(String commandName) {

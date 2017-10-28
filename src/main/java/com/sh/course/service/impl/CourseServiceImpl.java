@@ -56,7 +56,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void addLecturerCourse(int lecturerId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter {
+	public void addLecturerCourse(String lecturerId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		CourseDAO courseDAO = factory.getCourseDAO();
@@ -66,7 +66,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 		
 		try {
-			courseDAO.addLecturerCourse(lecturerId, courseId);
+			courseDAO.addLecturerCourse(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -74,7 +74,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void deleteLecturerCourse(int lecturerId, int courseId)
+	public void deleteLecturerCourse(String lecturerId, String courseId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		DAOFactory factory = DAOFactory.getInstance();
@@ -85,7 +85,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 		
 		try {
-			courseDAO.deleteLecturerCourse(lecturerId, courseId);
+			courseDAO.deleteLecturerCourse(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -109,7 +109,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<Course> getAllCourseLecturer(int lecturerId) throws ServiceException, ServiceExceptionInvalidParameter {
+	public List<Course> getAllCourseLecturer(String lecturerId) throws ServiceException, ServiceExceptionInvalidParameter {
 
 		List<Course> course = new ArrayList<>();
 		
@@ -121,7 +121,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 		
 		try {
-			course = courseDAO.getAllCourseLecturer(lecturerId);
+			course = courseDAO.getAllCourseLecturer(Integer.parseInt(lecturerId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -130,7 +130,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<User> getAllLecturerCourse(int courseId) throws ServiceException, ServiceExceptionInvalidParameter {
+	public List<User> getAllLecturerCourse(String courseId) throws ServiceException, ServiceExceptionInvalidParameter {
 
 		List<User> lecturers = new ArrayList<>();
 		
@@ -142,7 +142,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 		
 		try {
-			lecturers = courseDAO.getAllLecturerCourse(courseId);
+			lecturers = courseDAO.getAllLecturerCourse(Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -194,7 +194,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public boolean hasCourseLecturer(int lecturerId, int courseId)
+	public boolean hasCourseLecturer(String lecturerId, String courseId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		boolean result = false;
@@ -207,7 +207,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 		
 		try {
-			result = courseDAO.hasCourseLecturer(lecturerId, courseId);
+			result = courseDAO.hasCourseLecturer(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);

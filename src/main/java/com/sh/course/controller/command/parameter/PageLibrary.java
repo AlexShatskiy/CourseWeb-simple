@@ -28,4 +28,7 @@ public final class PageLibrary {
 	public static final String URL_GOOD_ENROLL_FOR_COURSE = "controller?command=GOOD_ENROLL_FOR_COURSE";
 	public static final String URL_BED_ENROLL_FOR_COURSE = "controller?command=BED_ENROLL_FOR_COURSE";
 	public static final String URL_BED_ENROLL_FOR_COURSE_HAS = "controller?command=BED_ENROLL_FOR_COURSE_HAS";
+	
+	public static final String URL_GOOD_RATING = "controller?command=GOOD_RATING";
+	public static final String URL_BED_RATING = "controller?command=BED_RATING";
 }

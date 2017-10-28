@@ -10,15 +10,15 @@ import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 
 public interface DiplomaService {
 	
-	void enrollForCourse(int userId, int courseId, int lecturerId) throws ServiceException, ServiceExceptionInvalidParameter;
-	void rateStudent(int userId, int courseId, int lecturerId, String comment, int rating) throws ServiceException, ServiceExceptionInvalidParameter;
+	void enrollForCourse(String userId, String courseId, String lecturerId) throws ServiceException, ServiceExceptionInvalidParameter;
+	void rateStudent(String userId, String courseId, String lecturerId, String comment, String rating) throws ServiceException, ServiceExceptionInvalidParameter;
 	
-	List<User> getStudentStudy(int lecturerId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
-	List<User> getStudentFinish(int lecturerId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
+	List<User> getStudentStudy(String lecturerId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter;
+	List<User> getStudentFinish(String lecturerId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter;
 	
-	List<Course> getCourseStudy(int userId) throws ServiceException, ServiceExceptionInvalidParameter;
-	List<Course> getCourseFinish(int userId) throws ServiceException, ServiceExceptionInvalidParameter;
+	List<Course> getCourseStudy(String userId) throws ServiceException, ServiceExceptionInvalidParameter;
+	List<Course> getCourseFinish(String userId) throws ServiceException, ServiceExceptionInvalidParameter;
 	
-	Diploma getDiplomaCourse(int userId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
-	boolean hasDiplomaCourse(int userId, int courseId) throws ServiceException, ServiceExceptionInvalidParameter;
+	Diploma getDiplomaCourse(String userId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter;
+	boolean hasDiplomaCourse(String userId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter;
 }

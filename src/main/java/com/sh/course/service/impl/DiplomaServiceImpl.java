@@ -23,7 +23,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	private static final Logger log = LogManager.getRootLogger();
 
 	@Override
-	public void enrollForCourse(int userId, int courseId, int lecturerId)
+	public void enrollForCourse(String userId, String courseId, String lecturerId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		DAOFactory factory = DAOFactory.getInstance();
@@ -35,7 +35,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			diplomaDAO.enrollForCourse(new Diploma(userId, courseId, lecturerId));
+			diplomaDAO.enrollForCourse(new Diploma(Integer.parseInt(userId), Integer.parseInt(courseId), Integer.parseInt(lecturerId)));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -43,7 +43,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	}
 
 	@Override
-	public void rateStudent(int userId, int courseId, int lecturerId, String comment, int rating)
+	public void rateStudent(String userId, String courseId, String lecturerId, String comment, String rating)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		DAOFactory factory = DAOFactory.getInstance();
@@ -55,7 +55,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			diplomaDAO.rateStudent(new Diploma(userId, courseId, lecturerId, comment, rating));
+			diplomaDAO.rateStudent(new Diploma(Integer.parseInt(userId), Integer.parseInt(courseId), Integer.parseInt(lecturerId), comment, Integer.parseInt(rating)));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -63,7 +63,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	}
 
 	@Override
-	public List<User> getStudentStudy(int lecturerId, int courseId)
+	public List<User> getStudentStudy(String lecturerId, String courseId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		List<User> students = new ArrayList<>();
@@ -76,7 +76,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			students = diplomaDAO.getStudentStudy(lecturerId, courseId);
+			students = diplomaDAO.getStudentStudy(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -85,7 +85,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	}
 
 	@Override
-	public List<User> getStudentFinish(int lecturerId, int courseId)
+	public List<User> getStudentFinish(String lecturerId, String courseId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		List<User> students = new ArrayList<>();
@@ -98,7 +98,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			students = diplomaDAO.getStudentFinish(lecturerId, courseId);
+			students = diplomaDAO.getStudentFinish(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -107,7 +107,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	}
 
 	@Override
-	public List<Course> getCourseStudy(int userId) throws ServiceException, ServiceExceptionInvalidParameter {
+	public List<Course> getCourseStudy(String userId) throws ServiceException, ServiceExceptionInvalidParameter {
 
 		List<Course> courses = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			courses = diplomaDAO.getCourseStudy(userId);
+			courses = diplomaDAO.getCourseStudy(Integer.parseInt(userId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -128,7 +128,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	}
 
 	@Override
-	public List<Course> getCourseFinish(int userId) throws ServiceException, ServiceExceptionInvalidParameter {
+	public List<Course> getCourseFinish(String userId) throws ServiceException, ServiceExceptionInvalidParameter {
 
 		List<Course> courses = new ArrayList<>();
 
@@ -140,7 +140,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			courses = diplomaDAO.getCourseFinish(userId);
+			courses = diplomaDAO.getCourseFinish(Integer.parseInt(userId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -149,7 +149,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	}
 
 	@Override
-	public Diploma getDiplomaCourse(int userId, int courseId)
+	public Diploma getDiplomaCourse(String userId, String courseId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 
 		Diploma diploma = null;
@@ -162,7 +162,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			diploma = diplomaDAO.getDiplomaCourse(userId, courseId);
+			diploma = diplomaDAO.getDiplomaCourse(Integer.parseInt(userId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);
@@ -171,7 +171,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 	}
 
 	@Override
-	public boolean hasDiplomaCourse(int userId, int courseId)
+	public boolean hasDiplomaCourse(String userId, String courseId)
 			throws ServiceException, ServiceExceptionInvalidParameter {
 		
 		boolean result = false;
@@ -184,7 +184,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 		}
 		
 		try {
-			result = diplomaDAO.hasDiplomaCourse(userId, courseId);
+			result = diplomaDAO.hasDiplomaCourse(Integer.parseInt(userId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
 			throw new ServiceException(e);

@@ -26,18 +26,18 @@ public class EnrollForCourse implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int userId;
-		int courseId;
-		int lecturerId;
+		String userId;
+		String courseId;
+		String lecturerId;
 		
 		ServiceFactory factory = ServiceFactory.getInstance();
 		DiplomaService diplomaService = factory.getDiplomaService();
 		
 		HttpSession session = request.getSession(true);
 		
-		userId = (Integer) session.getAttribute(SessionAttribute.USER_ID);
-		courseId = Integer.parseInt(request.getParameter(PageParameter.COURSE_ID));
-		lecturerId = Integer.parseInt(request.getParameter(PageParameter.LECTURER_ID)); 
+		userId = (String) session.getAttribute(SessionAttribute.USER_ID);
+		courseId = request.getParameter(PageParameter.COURSE_ID);
+		lecturerId = request.getParameter(PageParameter.LECTURER_ID); 
 		
 		try {
 			diplomaService.enrollForCourse(userId, courseId, lecturerId);

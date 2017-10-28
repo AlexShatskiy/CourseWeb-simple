@@ -26,17 +26,17 @@ public class DeleteLecturerCourse implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int lecturerId;
-		int courseId;
+		String lecturerId;
+		String courseId;
 
 		ServiceFactory factory = ServiceFactory.getInstance();
 		CourseService courseService = factory.getCourseService();
 
 		HttpSession session = request.getSession(true);
 
-		lecturerId = (Integer) session.getAttribute(SessionAttribute.USER_ID);
+		lecturerId = (String) session.getAttribute(SessionAttribute.USER_ID);
 
-		courseId = Integer.parseInt(request.getParameter(PageParameter.COURSE_ID));
+		courseId = request.getParameter(PageParameter.COURSE_ID);
 
 		try {
 			courseService.deleteLecturerCourse(lecturerId, courseId);

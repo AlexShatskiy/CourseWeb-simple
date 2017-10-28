@@ -58,7 +58,7 @@ public class CheckIn implements Command {
 			} else {
 
 				HttpSession session = request.getSession(true);
-				session.setAttribute(SessionAttribute.USER_ID, user.getUserId());
+				session.setAttribute(SessionAttribute.USER_ID, user.getUserId().toString());
 				session.setAttribute(SessionAttribute.ROLE, user.getRole());
 				session.setAttribute(SessionAttribute.NICKNAME, user.getNickname());
 

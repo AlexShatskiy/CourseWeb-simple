@@ -42,4 +42,6 @@ public enum CommandName {
 	
 	RATE_STUDENT_PAGE,
 	RATE_STUDENT,
+	GOOD_RATING,
+	BED_RATING,
 }

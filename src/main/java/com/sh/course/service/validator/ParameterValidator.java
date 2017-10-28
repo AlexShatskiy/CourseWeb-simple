@@ -10,6 +10,8 @@ public final class ParameterValidator {
 	}
 
 	private static String EMAIL_REGEXP = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
+	private static String ID_REGEXP = "\\d+";
+	private static String RATING_REGEXP = "[1-9]|10";
 
 	public static boolean isEmailValid(String email) {
 		if (email == null) {
@@ -51,17 +53,27 @@ public final class ParameterValidator {
 		return true;
 	}
 	
-	public static boolean isIdValid(int id) {
-		if (id <= 0) {
+	public static boolean isIdValid(String id) {
+		if (id == null) {
+			return false;
+		} else if (id.isEmpty()) {
 			return false;
 		}
-		return true;
+		Pattern pattern = Pattern.compile(ID_REGEXP);
+		Matcher matcher = pattern.matcher(id);
+
+		return matcher.matches();
 	}
 	
-	public static boolean isRatingValid(int rating) {
-		if (rating <= 0 || rating > 10) {
+	public static boolean isRatingValid(String rating) {
+		if (rating == null) {
+			return false;
+		} else if (rating.isEmpty()) {
 			return false;
 		}
-		return true;
+		Pattern pattern = Pattern.compile(RATING_REGEXP);
+		Matcher matcher = pattern.matcher(rating);
+
+		return matcher.matches();
 	}
 }

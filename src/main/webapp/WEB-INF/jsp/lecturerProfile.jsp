@@ -112,18 +112,18 @@
 						</form>
 					</c:forEach>
 				</c:if>
+				
 				<c:if test="${not empty requestScope.coursesLecturer }">
 					<c:forEach var="course" items="${requestScope.coursesLecturer}" >
 						<h2 class="thin">${course.getTitle()}</h2>
 						<p class="text-muted">${course.getContent()}</p>
-						<hr/>
 						<ul class="nav navbar-nav pull-right">
 							<li>
 								<form method="post" action="controller">
 								 	<input type="hidden" name="command" value="DELETE_LECTURER_COURSE" />
 								 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
 									<button type="submit" class="btn">
-										DELETE LECTURER COURSE
+										DELETE
 									</button>
 								</form>
 							</li>
@@ -148,8 +148,10 @@
 								</form>
 							</li>
 						</ul>
+						<hr>
 					</c:forEach>
 				</c:if>
+				
 				<c:if test="${not empty requestScope.coursesAvailable}">
 					<c:forEach var="course" items="${requestScope.coursesAvailable}" >
 						<h2 class="thin">${course.getTitle()}</h2>

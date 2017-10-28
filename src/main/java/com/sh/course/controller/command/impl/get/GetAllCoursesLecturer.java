@@ -39,13 +39,13 @@ public class GetAllCoursesLecturer implements Command {
 
 		String page;
 		Role role;
-		int lecturerId;
+		String lecturerId;
 		String pageSetAttribute;
 
 		HttpSession session = request.getSession(true);
 		role = (Role) session.getAttribute(SessionAttribute.ROLE);
 		
-		Integer sessionId = (Integer) session.getAttribute(SessionAttribute.USER_ID);
+		String sessionId = (String) session.getAttribute(SessionAttribute.USER_ID);
 		String pageLecturerId = request.getParameter(PageParameter.LECTURER_ID);
 
 		if (Role.LECTURER.equals(role)) {
@@ -53,16 +53,16 @@ public class GetAllCoursesLecturer implements Command {
 			if (pageLecturerId == null) {
 				lecturerId = sessionId;
 				pageSetAttribute = PageSetAttribute.COURSES_LECTURER;
-			} else if (sessionId.equals(Integer.parseInt(pageLecturerId))){
+			} else if (sessionId.equals(pageLecturerId)){
 				lecturerId = sessionId;
 				pageSetAttribute = PageSetAttribute.COURSES_LECTURER;
 			} else {
-				lecturerId = Integer.parseInt(pageLecturerId);
+				lecturerId = pageLecturerId;
 				pageSetAttribute = PageSetAttribute.COURSES_AVAILABLE;
 			}
 			page = PageLibrary.LECTURER_PROFILE;
 		} else {
-			lecturerId = Integer.parseInt(pageLecturerId);
+			lecturerId = pageLecturerId;
 			page = PageLibrary.USER_PROFILE;
 			pageSetAttribute = PageSetAttribute.COURSES_AVAILABLE;
 		}

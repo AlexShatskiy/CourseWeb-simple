@@ -31,16 +31,16 @@ public class GetStudentsStudy implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<User> students;
-		int lecturerId;
-		int courseId;
+		String lecturerId;
+		String courseId;
 		
 		ServiceFactory factory = ServiceFactory.getInstance();
 		DiplomaService diplomaService = factory.getDiplomaService();
 		
 		HttpSession session = request.getSession(true);
 
-		lecturerId = (Integer) session.getAttribute(SessionAttribute.USER_ID);
-		courseId = Integer.parseInt(request.getParameter(PageParameter.COURSE_ID));
+		lecturerId = (String) session.getAttribute(SessionAttribute.USER_ID);
+		courseId = request.getParameter(PageParameter.COURSE_ID);
 		
 		try {
 			students = diplomaService.getStudentStudy(lecturerId, courseId);
