@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" errorPage="WEB-INF/jsp/error.jsp"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
-	
 	<title>lecturer</title>
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
@@ -28,7 +27,7 @@
 	<![endif]-->
 </head>
 
-<body>
+<body class="home">
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
@@ -44,7 +43,7 @@
 						<form method="get" action="controller">
 						 	<input type="hidden" name="command" value="SIGN_IN_PAGE" /> 
 							<button type="submit" class="btn">
-								SIGN IN
+								<fmt:message key="login.label.signIn" />
 							</button>
 						</form>
 					</li>
@@ -55,7 +54,7 @@
 						<form method="get" action="controller">
 						 	<input type="hidden" name="command" value="SIGN_OUT" /> 
 							<button type="submit" class="btn">
-								SIGN OUT
+								<fmt:message key="login.label.signOut" />
 							</button>
 						</form>
 					</li>
@@ -107,7 +106,7 @@
 						 	<input type="hidden" name="command" value="ADD_LECTURER_COURSE" />
 						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
 							<button type="submit" class="btn">
-								ADD LECTURER COURSE
+								<fmt:message key="login.label.teachingCourse" />
 							</button>
 						</form>
 					</c:forEach>
@@ -117,37 +116,38 @@
 					<c:forEach var="course" items="${requestScope.coursesLecturer}" >
 						<h2 class="thin">${course.getTitle()}</h2>
 						<p class="text-muted">${course.getContent()}</p>
-						<ul class="nav navbar-nav pull-right">
-							<li>
+						<br/>
+						<div class="row">
+							<div class="col-md-4">
 								<form method="post" action="controller">
 								 	<input type="hidden" name="command" value="DELETE_LECTURER_COURSE" />
 								 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
 									<button type="submit" class="btn">
-										DELETE
+										<fmt:message key="login.label.notTeach" />
 									</button>
 								</form>
-							</li>
-							<li>
+							</div>
+							<div class="col-md-4">
 								<form method="get" action="controller">
 								 	<input type="hidden" name="command" value="GET_STUDENT_STUDY" />
 								 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
 								 	<input type="hidden" name="title" value="${course.getTitle()}" />
 									<button type="submit" class="btn">
-										STUDENT STUDY
+										<fmt:message key="login.label.students" />
 									</button>
 								</form>
-							</li>
-							<li>
+							</div>
+							<div class="col-md-4">
 								<form method="get" action="controller">
 								 	<input type="hidden" name="command" value="GET_STUDENT_FINISH" />
 								 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
 								 	<input type="hidden" name="title" value="${course.getTitle()}" />
 									<button type="submit" class="btn">
-										STUDENT FINISH
+										<fmt:message key="login.label.graduatedStudents" />
 									</button>
 								</form>
-							</li>
-						</ul>
+							</div>
+						</div>
 						<hr>
 					</c:forEach>
 				</c:if>
@@ -162,7 +162,7 @@
 						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
 						 	<input type="hidden" name="title" value="${course.getTitle()}" />
 							<button type="submit" class="btn">
-								ENROLL COURSE LECTURERS
+								<fmt:message key="login.label.registerForCourse" />
 							</button>
 						</form>
 					</c:forEach>
@@ -180,7 +180,7 @@
 								 	<input type="hidden" name="command" value="GET_ALL_COURSE_LECTURER" /> 
 								 	<input type="hidden" name="lecturerId" value="${lecturer.getUserId()}" /> 
 									<button type="submit" class="btn">
-										GET ALL COURSES LECTURER
+										<fmt:message key="login.label.coursesTaught" />
 									</button>
 								</form>
 							</li>
@@ -190,7 +190,7 @@
 								 	<input type="hidden" name="lecturerId" value="${lecturer.getUserId()}" />
 								 	<input type="hidden" name="courseId" value="${requestScope.courseId}" /> 
 									<button type="submit" class="btn">
-										ENROLL
+										<fmt:message key="login.label.enroll" />
 									</button>
 								</form>
 							</li>
@@ -212,7 +212,7 @@
 								 	<input type="hidden" name="title" value="${requestScope.title}" /> 
 								 	<input type="hidden" name="nickname" value="${student.getNickname()}" /> 
 									<button type="submit" class="btn">
-										RATE_PAGE
+										<fmt:message key="login.label.grade" />
 									</button>
 								</form>
 							</li>
@@ -226,11 +226,6 @@
 					<c:forEach var="student" items="${requestScope.studentsFinish}" >
 						<h2 class="thin">${student.getNickname()}</h2>
 						<hr/>
-						<ul class="nav navbar-nav pull-right">
-							<li>
-								
-							</li>
-						</ul>
 					</c:forEach>
 				</c:if>
 				
@@ -244,7 +239,7 @@
 						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
 						 	<input type="hidden" name="title" value="${course.getTitle()}" />
 							<button type="submit" class="btn">
-								GET dIPOMA
+								<fmt:message key="login.label.diploma" />
 							</button>
 						</form>
 					</c:forEach>
@@ -255,9 +250,9 @@
 					<h2 class="thin">${requestScope.title}</h2>
 					<br>
 					<c:if test="${not empty requestScope.diploma.getComment()}">
-						<p class="text-muted">Comment: ${requestScope.diploma.getComment()}</p>
+						<p class="text-muted"><fmt:message key="login.label.comment" />: ${requestScope.diploma.getComment()}</p>
 						<br>
-						<p class="text-muted">Rating: ${requestScope.diploma.getRating()}</p>
+						<p class="text-muted"><fmt:message key="login.label.rating" />: ${requestScope.diploma.getRating()}</p>
 					</c:if>
 					<c:if test="${empty requestScope.diploma.getComment()}">
 						<p class="text-muted">You study this course</p>
@@ -275,7 +270,7 @@
 						<input type="hidden" name="command" value="SEARCH_AVAILABLE_COURSE" /> 
 				  		<input type="text" name="titleOrContent" class="form-control">
 				  		
-						<button type="submit" class="btn">SEARCH</button>
+						<button type="submit" class="btn"><fmt:message key="login.label.search" /></button>
 					</form>
 					<hr>
 
@@ -284,7 +279,7 @@
 							<form method="get" action="controller">
 							 	<input type="hidden" name="command" value="PROFILE_PAGE" /> 
 								<button type="submit" class="btn">
-									ALL COURSE
+									<fmt:message key="login.label.allCourses" />
 								</button>
 							</form>
 						</li>
@@ -292,7 +287,7 @@
 							<form method="get" action="controller">
 							 	<input type="hidden" name="command" value="ADD_COURSE_PAGE" /> 
 								<button type="submit" class="btn">
-									ADD COURSE
+									<fmt:message key="login.label.addCourse" />
 								</button>
 							</form>
 						</li>
@@ -300,7 +295,7 @@
 							<form method="get" action="controller">
 							 	<input type="hidden" name="command" value="GET_ALL_COURSE_LECTURER" /> 
 								<button type="submit" class="btn">
-									GET ALL COURSE LECTURER
+									<fmt:message key="login.label.coursesTaught" />
 								</button>
 							</form>
 						</li>
@@ -308,7 +303,7 @@
 							<form method="get" action="controller">
 							 	<input type="hidden" name="command" value="GET_AVAILABLE_COURSE" /> 
 								<button type="submit" class="btn">
-									GET AVAILABLE COURSE
+									<fmt:message key="login.label.availableCourses" />
 								</button>
 							</form>
 						</li>
@@ -316,7 +311,7 @@
 							<form method="get" action="controller">
 							 	<input type="hidden" name="command" value="GET_COURSE_STUDY" /> 
 								<button type="submit" class="btn">
-									GET COURSE study
+									<fmt:message key="login.label.studyingCourses" />
 								</button>
 							</form>
 						</li>
@@ -324,7 +319,7 @@
 							<form method="get" action="controller">
 							 	<input type="hidden" name="command" value="GET_COURSE_FINISH" /> 
 								<button type="submit" class="btn">
-									GET COURSE finish
+									<fmt:message key="login.label.coursesLearned" />
 								</button>
 							</form>
 						</li>
@@ -348,17 +343,17 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 widget">
-						<h3 class="widget-title">Contact</h3>
+						<h3 class="widget-title"><fmt:message key="login.label.contact" /></h3>
 						<div class="widget-body">
 							<p>+375 29 ### 64 38<br>
 								<a href="mailto:#">leha.shatskiy@gmail.com</a><br>
 								<br>
-								Minsk
+								<fmt:message key="login.label.minsk" />
 							</p>	
 						</div>
 					</div>
 					<div class="col-md-3 widget">
-						<h3 class="widget-title">Follow me</h3>
+						<h3 class="widget-title"><fmt:message key="login.label.follow" /></h3>
 						<div class="widget-body">
 							<p class="follow-me-icons">
 								<a href=""><i class="fa fa-twitter fa-2"></i></a>
@@ -381,13 +376,8 @@
 				</div>
 			</div>
 		</div>
-
 	</footer>	
 		
-
-
-
-
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>

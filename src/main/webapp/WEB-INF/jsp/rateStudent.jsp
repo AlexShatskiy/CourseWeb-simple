@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" errorPage="WEB-INF/jsp/error.jsp"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
-	
-	<title>rate</title>
+	<title>rating</title>
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
@@ -28,7 +27,7 @@
 	<![endif]-->
 </head>
 
-<body>
+<body class="home">
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
@@ -44,7 +43,7 @@
 						<form method="get" action="controller">
 						 	<input type="hidden" name="command" value="SIGN_IN_PAGE" /> 
 							<button type="submit" class="btn">
-								SIGN IN
+								<fmt:message key="login.label.signIn" />
 							</button>
 						</form>
 					</li>
@@ -55,7 +54,7 @@
 						<form method="get" action="controller">
 						 	<input type="hidden" name="command" value="SIGN_OUT" /> 
 							<button type="submit" class="btn">
-								SIGN OUT
+								<fmt:message key="login.label.signOut" />
 							</button>
 						</form>
 					</li>
@@ -87,18 +86,18 @@
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<h3 class="thin text-center">RATE</h3>
-							<p>Student: ${requestScope.nickname}</p>
+							<h3 class="thin text-center"><fmt:message key="login.label.diploma" /></h3>
+							<p><fmt:message key="login.label.student" />: ${requestScope.nickname}</p>
 							<br>
-							<p>Course: ${requestScope.title}</p>
+							<p><fmt:message key="login.label.cours" />: ${requestScope.title}</p>
 							<hr>
 							<form method="post" action="controller">
 								<input type="hidden" name="command" value="RATE_STUDENT" />
 								<div class="top-margin">
-									<label>Comment <span class="text-danger">*</span></label>
+									<label><fmt:message key="login.label.comment" /> <span class="text-danger">*</span></label>
 									<textarea name="comment" cols = "50" rows="7" class="form-control"></textarea>
 									<hr>
-									<label>Rate <span class="text-danger">*</span></label>
+									<label><fmt:message key="login.label.rating" /> <span class="text-danger">*</span></label>
 										<input type="radio" name="rating" value="1" /> 1
 										<input type="radio" name="rating" value="2" /> 2
 										<input type="radio" name="rating" value="3" /> 3
@@ -112,7 +111,7 @@
 									<hr>
 									<input type="hidden" name="courseId" value="${requestScope.courseId}" />
 									<input type="hidden" name="userId" value="${requestScope.userId}" />
-									<button class="btn btn-action" type="submit">RATE</button>
+									<button class="btn btn-action" type="submit"><fmt:message key="login.label.grade" /></button>
 								</div>
 							</form>
 						</div>
@@ -132,17 +131,17 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 widget">
-						<h3 class="widget-title">Contact</h3>
+						<h3 class="widget-title"><fmt:message key="login.label.contact" /></h3>
 						<div class="widget-body">
 							<p>+375 29 ### 64 38<br>
 								<a href="mailto:#">leha.shatskiy@gmail.com</a><br>
 								<br>
-								Minsk
+								<fmt:message key="login.label.minsk" />
 							</p>	
 						</div>
 					</div>
 					<div class="col-md-3 widget">
-						<h3 class="widget-title">Follow me</h3>
+						<h3 class="widget-title"><fmt:message key="login.label.follow" /></h3>
 						<div class="widget-body">
 							<p class="follow-me-icons">
 								<a href=""><i class="fa fa-twitter fa-2"></i></a>
@@ -165,13 +164,8 @@
 				</div>
 			</div>
 		</div>
-
 	</footer>	
 		
-
-
-
-
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>

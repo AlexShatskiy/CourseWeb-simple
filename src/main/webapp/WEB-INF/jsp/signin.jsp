@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" errorPage="WEB-INF/jsp/error.jsp"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
-	
-	<title>signIn</title>
+	<title>sign in</title>
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
@@ -28,7 +27,7 @@
 	<![endif]-->
 </head>
 
-<body>
+<body class="home">
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
@@ -44,7 +43,7 @@
 						<form method="get" action="controller">
 						 	<input type="hidden" name="command" value="SIGN_IN_PAGE" /> 
 							<button type="submit" class="btn">
-								SIGN IN
+								<fmt:message key="login.label.signIn" />
 							</button>
 						</form>
 					</li>
@@ -55,7 +54,7 @@
 						<form method="get" action="controller">
 						 	<input type="hidden" name="command" value="SIGN_OUT" /> 
 							<button type="submit" class="btn">
-								SIGN OUT
+								<fmt:message key="login.label.signOut" />
 							</button>
 						</form>
 					</li>
@@ -72,7 +71,6 @@
 			</div><!--/.nav-collapse -->
 		</div>
 	</div> 
-	<!-- /.navbar -->
 
 	<header id="head" class="secondary"></header>
 
@@ -96,21 +94,21 @@
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<h3 class="thin text-center">Sign in to your account</h3>
+							<h3 class="thin text-center"><fmt:message key="login.label.signInTo" /></h3>
 							<hr>						
 							<form method="post" action="controller">
 								<input type="hidden" name="command" value="SIGN_IN" />
 								<div class="top-margin">
-									<label>Username/Email <span class="text-danger">*</span></label>
+									<label><fmt:message key="login.label.email" /> <span class="text-danger">*</span></label>
 									<input type="email" name="email" class="form-control" required="required">
 								</div>
 								<div class="top-margin">
-									<label>Password <span class="text-danger">*</span></label>
+									<label><fmt:message key="login.label.password" /> <span class="text-danger">*</span></label>
 									<input type="password" name="password" class="form-control" required="required">
 								</div>
-							<hr>
+								<br>
 								<div class="col-lg-4 text-right">
-									<button class="btn btn-action" type="submit">Sign in</button>
+									<button class="btn btn-action" type="submit"><fmt:message key="login.label.signIn" /></button>
 								</div>
 							</form>
 							<br>
@@ -121,7 +119,7 @@
 									<form method="get" action="controller">
 									 	<input type="hidden" name="command" value="PASSWORD_RECOVERY_PAGE" /> 
 										<button type="submit" class="btn-link">
-											Forgot password?
+											<fmt:message key="login.label.forgot" />
 										</button>
 									</form>
 								</div>
@@ -129,18 +127,18 @@
 									<form method="get" action="controller">
 									 	<input type="hidden" name="command" value="REGISTRATION_PAGE" /> 
 										<button type="submit" class="btn-link">
-											registration
+											<fmt:message key="login.label.checkIn" />
 										</button>
 									</form>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>	
 			</article>
 			<!-- /Article -->
 		</div>
+		
 		
 		
 			<form method="post" action="controller">
@@ -187,17 +185,17 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 widget">
-						<h3 class="widget-title">Contact</h3>
+						<h3 class="widget-title"><fmt:message key="login.label.contact" /></h3>
 						<div class="widget-body">
 							<p>+375 29 ### 64 38<br>
 								<a href="mailto:#">leha.shatskiy@gmail.com</a><br>
 								<br>
-								Minsk
+								<fmt:message key="login.label.minsk" />
 							</p>	
 						</div>
 					</div>
 					<div class="col-md-3 widget">
-						<h3 class="widget-title">Follow me</h3>
+						<h3 class="widget-title"><fmt:message key="login.label.follow" /></h3>
 						<div class="widget-body">
 							<p class="follow-me-icons">
 								<a href=""><i class="fa fa-twitter fa-2"></i></a>
@@ -215,18 +213,13 @@
 			<div class="container">
 				<div class="widget-body">
 					<p class="text">
-						Copyright &copy; 2017, Shatskiy Alex.
+						Copyright &copy; 2017, Shatskiy Alex. 
 					</p>
 				</div>
 			</div>
 		</div>
-
 	</footer>	
 		
-
-
-
-
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
