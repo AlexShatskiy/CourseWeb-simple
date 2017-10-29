@@ -11,6 +11,9 @@ import com.sh.course.controller.command.impl.SignOut;
 import com.sh.course.controller.command.impl.get.GetAllCoursesLecturer;
 import com.sh.course.controller.command.impl.get.GetAllLecturersCourse;
 import com.sh.course.controller.command.impl.get.GetAvailableCourses;
+import com.sh.course.controller.command.impl.get.GetCoursesFinish;
+import com.sh.course.controller.command.impl.get.GetCoursesStudy;
+import com.sh.course.controller.command.impl.get.GetDiploma;
 import com.sh.course.controller.command.impl.get.GetStudentsFinish;
 import com.sh.course.controller.command.impl.get.GetStudentsStudy;
 import com.sh.course.controller.command.impl.get.SearcAvailableCourses;
@@ -91,6 +94,11 @@ public class CommandProvider {
 		commands.put(CommandName.RATE_STUDENT, new RateStudent());
 		commands.put(CommandName.GOOD_RATING, new GoodRating());
 		commands.put(CommandName.BED_RATING, new BedRating());
+		
+		commands.put(CommandName.GET_COURSE_STUDY, new GetCoursesStudy());
+		commands.put(CommandName.GET_COURSE_FINISH, new GetCoursesFinish());
+		
+		commands.put(CommandName.GET_DIPLOMA, new GetDiploma());
 	}
 
 	public Command getCommand(String commandName) {

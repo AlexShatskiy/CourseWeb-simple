@@ -8,6 +8,7 @@ public class PageSetAttribute {
 	public static final String COURSES_AVAILABLE = "coursesAvailable";
 	public static final String COURSES_ALL = "coursesAll";
 	public static final String COURSES_LECTURER = "coursesLecturer";
+	public static final String COURSES_DIPLOMA = "coursesDiploma";
 	
 	public static final String LECTURERS_COURSE = "lecturersCourse";
 	
@@ -18,4 +19,6 @@ public class PageSetAttribute {
 	
 	public static final String STUDENTS_STUDY = "studentsStudy";
 	public static final String STUDENTS_FINISH = "studentsFinish";
+	
+	public static final String DIPLOMA = "diploma";
 }

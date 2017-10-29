@@ -167,6 +167,7 @@
 						</form>
 					</c:forEach>
 				</c:if>
+				
 				<c:if test="${not empty requestScope.lecturersCourse}">
 					<h2>${requestScope.title}</h2>
 					<hr/>
@@ -218,6 +219,7 @@
 						</ul>
 					</c:forEach>
 				</c:if>
+				
 				<c:if test="${not empty requestScope.studentsFinish}">
 					<h2>${requestScope.title}</h2>
 					<hr/>
@@ -231,6 +233,37 @@
 						</ul>
 					</c:forEach>
 				</c:if>
+				
+				<c:if test="${not empty requestScope.coursesDiploma}">
+					<c:forEach var="course" items="${requestScope.coursesDiploma}" >
+						<h2 class="thin">${course.getTitle()}</h2>
+						<p class="text-muted">${course.getContent()}</p>
+						<hr/>
+						<form method="get" action="controller">
+						 	<input type="hidden" name="command" value="GET_DIPLOMA" />
+						 	<input type="hidden" name="courseId" value="${course.getCourseId()}" />
+						 	<input type="hidden" name="title" value="${course.getTitle()}" />
+							<button type="submit" class="btn">
+								GET dIPOMA
+							</button>
+						</form>
+					</c:forEach>
+				</c:if>
+				
+				<c:if test="${not empty requestScope.diploma}">
+					
+					<h2 class="thin">${requestScope.title}</h2>
+					<br>
+					<c:if test="${not empty requestScope.diploma.getComment()}">
+						<p class="text-muted">Comment: ${requestScope.diploma.getComment()}</p>
+						<br>
+						<p class="text-muted">Rating: ${requestScope.diploma.getRating()}</p>
+					</c:if>
+					<c:if test="${empty requestScope.diploma.getComment()}">
+						<p class="text-muted">You study this course</p>
+					</c:if>
+				</c:if>
+				
 			</article>
 			<!-- /Article -->
 			
@@ -276,6 +309,22 @@
 							 	<input type="hidden" name="command" value="GET_AVAILABLE_COURSE" /> 
 								<button type="submit" class="btn">
 									GET AVAILABLE COURSE
+								</button>
+							</form>
+						</li>
+						<li>
+							<form method="get" action="controller">
+							 	<input type="hidden" name="command" value="GET_COURSE_STUDY" /> 
+								<button type="submit" class="btn">
+									GET COURSE study
+								</button>
+							</form>
+						</li>
+						<li>
+							<form method="get" action="controller">
+							 	<input type="hidden" name="command" value="GET_COURSE_FINISH" /> 
+								<button type="submit" class="btn">
+									GET COURSE finish
 								</button>
 							</form>
 						</li>
