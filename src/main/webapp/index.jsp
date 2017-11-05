@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="/WEB-INF/dynamicattrTag.tld" prefix="sh"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
@@ -101,6 +102,8 @@
 
 	<!-- Intro -->
 	<div class="container text-center">
+	<sh:sht  myValue="My Value"/>
+	
 		<c:if test="${not empty requestScope.coursesAvailable}">
 			<c:forEach var="course" items="${requestScope.coursesAvailable}" >
 				<h2 class="thin">${course.getTitle()}</h2>
