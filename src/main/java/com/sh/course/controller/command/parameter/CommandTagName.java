@@ -1,4 +1,4 @@
-package com.sh.course.controller;
+package com.sh.course.controller.command.parameter;
 
 public enum CommandTagName {
 

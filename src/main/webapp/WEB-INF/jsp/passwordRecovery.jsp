@@ -88,7 +88,7 @@
 							<h3 class="thin text-center"><fmt:message key="login.label.recovery" /></h3>
 							<hr>
 							
-							<form>
+							<form method="post" action="controller">
 								<input type="hidden" name="command" value="PASSWORD_RECOVERY" />
 								<div class="top-margin">
 									<label><fmt:message key="login.label.email" /> <span class="text-danger">*</span></label>

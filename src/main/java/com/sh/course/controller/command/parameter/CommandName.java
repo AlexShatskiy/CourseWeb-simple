@@ -1,5 +1,6 @@
 package com.sh.course.controller.command.parameter;
 
+@Deprecated
 public enum CommandName {
 	SIGN_IN_PAGE,
 	REGISTRATION_PAGE,

@@ -51,7 +51,7 @@
 					
 					<c:if test="${not empty sessionScope.userId }">
 					<li>
-						<form method="get" action="controller">
+						<form method="post" action="controller">
 						 	<input type="hidden" name="command" value="SIGN_OUT" /> 
 							<button type="submit" class="btn">
 								<fmt:message key="login.label.signOut" />

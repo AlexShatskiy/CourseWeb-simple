@@ -4,10 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.sh.course.controller.command.Command;
-import com.sh.course.controller.command.impl.CheckIn;
-import com.sh.course.controller.command.impl.PasswordRecovery;
-import com.sh.course.controller.command.impl.SignIn;
-import com.sh.course.controller.command.impl.SignOut;
 import com.sh.course.controller.command.impl.get.GetAllCoursesLecturer;
 import com.sh.course.controller.command.impl.get.GetAllLecturersCourse;
 import com.sh.course.controller.command.impl.get.GetAvailableCourses;
@@ -25,9 +21,13 @@ import com.sh.course.controller.command.impl.page.RegistrationPage;
 import com.sh.course.controller.command.impl.page.SignInPage;
 import com.sh.course.controller.command.impl.post.AddCourse;
 import com.sh.course.controller.command.impl.post.AddLecturerCourse;
+import com.sh.course.controller.command.impl.post.CheckIn;
 import com.sh.course.controller.command.impl.post.DeleteLecturerCourse;
 import com.sh.course.controller.command.impl.post.EnrollForCourse;
+import com.sh.course.controller.command.impl.post.PasswordRecovery;
 import com.sh.course.controller.command.impl.post.RateStudent;
+import com.sh.course.controller.command.impl.post.SignIn;
+import com.sh.course.controller.command.impl.post.SignOut;
 import com.sh.course.controller.command.impl.result.BedAddCourse;
 import com.sh.course.controller.command.impl.result.BedAddHasTitleCourse;
 import com.sh.course.controller.command.impl.result.BedAddInvalidCourse;
@@ -43,6 +43,7 @@ import com.sh.course.controller.command.impl.result.GoodEnrollForCourse;
 import com.sh.course.controller.command.impl.result.GoodRating;
 import com.sh.course.controller.command.parameter.CommandName;
 
+@Deprecated
 public class CommandProvider {
 
 	private Map<CommandName, Command> commands = new HashMap<>();

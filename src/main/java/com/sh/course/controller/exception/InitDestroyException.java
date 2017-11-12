@@ -1,5 +1,5 @@
 package com.sh.course.controller.exception;
-//utf-8
+
 public class InitDestroyException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 

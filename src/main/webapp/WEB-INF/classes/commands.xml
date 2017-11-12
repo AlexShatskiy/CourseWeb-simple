@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+
+	<command>
+		<name>CHECK_IN</name>
+		<realization>com.sh.course.controller.command.impl.post.CheckIn</realization>
+	</command>
+
+	<command>
+		<name>PASSWORD_RECOVERY</name>
+		<realization>com.sh.course.controller.command.impl.post.PasswordRecovery</realization>
+	</command>
+
+	<command>
+		<name>SIGN_IN</name>
+		<realization>com.sh.course.controller.command.impl.post.SignIn</realization>
+	</command>
+
+	<command>
+		<name>SIGN_OUT</name>
+		<realization>com.sh.course.controller.command.impl.post.SignOut</realization>
+	</command>
+
+	<command>
+		<name>ADD_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.post.AddCourse</realization>
+	</command>
+
+	<command>
+		<name>PASSWORD_RECOVERY_PAGE</name>
+		<realization>com.sh.course.controller.command.impl.page.PasswordRecoveryPage</realization>
+	</command>
+
+	<command>
+		<name>PROFILE_PAGE</name>
+		<realization>com.sh.course.controller.command.impl.page.ProfilePage</realization>
+	</command>
+
+	<command>
+		<name>REGISTRATION_PAGE</name>
+		<realization>com.sh.course.controller.command.impl.page.RegistrationPage</realization>
+	</command>
+
+	<command>
+		<name>SIGN_IN_PAGE</name>
+		<realization>com.sh.course.controller.command.impl.page.SignInPage</realization>
+	</command>
+
+	<command>
+		<name>ADD_COURSE_PAGE</name>
+		<realization>com.sh.course.controller.command.impl.page.AddCoursePage</realization>
+	</command>
+
+	<command>
+		<name>SEARCH_AVAILABLE_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.get.SearcAvailableCourses</realization>
+	</command>
+
+	<command>
+		<name>GET_AVAILABLE_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.get.GetAvailableCourses</realization>
+	</command>
+
+	<command>
+		<name>GET_ALL_COURSE_LECTURER</name>
+		<realization>com.sh.course.controller.command.impl.get.GetAllCoursesLecturer</realization>
+	</command>
+
+	<command>
+		<name>GOOD_ADD_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.GoodAddCourse</realization>
+	</command>
+
+	<command>
+		<name>BED_ADD_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.BedAddCourse</realization>
+	</command>
+
+	<command>
+		<name>BED_ADD_HAS_TITLE_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.BedAddHasTitleCourse</realization>
+	</command>
+
+	<command>
+		<name>BED_ADD_INVALID_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.BedAddInvalidCourse</realization>
+	</command>
+
+	<command>
+		<name>ADD_LECTURER_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.post.AddLecturerCourse</realization>
+	</command>
+
+	<command>
+		<name>DELETE_LECTURER_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.post.DeleteLecturerCourse</realization>
+	</command>
+
+	<command>
+		<name>GOOD_ADD_LECTURER_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.GoodAddLecturerCourse</realization>
+	</command>
+
+	<command>
+		<name>BED_ADD_LECTURER_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.BedAddLecturerCourse</realization>
+	</command>
+
+	<command>
+		<name>GOOD_DELETE_LECTURER_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.GoodDeleteLecturerCourse</realization>
+	</command>
+
+	<command>
+		<name>BED_DELETE_LECTURER_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.BedDeleteLecturerCourse</realization>
+	</command>
+
+	<command>
+		<name>GET_ALL_LECTURER_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.get.GetAllLecturersCourse</realization>
+	</command>
+
+	<command>
+		<name>ENROLL_FOR_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.post.EnrollForCourse</realization>
+	</command>
+
+	<command>
+		<name>GOOD_ENROLL_FOR_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.GoodEnrollForCourse</realization>
+	</command>
+
+	<command>
+		<name>BED_ENROLL_FOR_COURSE</name>
+		<realization>com.sh.course.controller.command.impl.result.BedEnrollForCourse</realization>
+	</command>
+
+	<command>
+		<name>BED_ENROLL_FOR_COURSE_HAS</name>
+		<realization>com.sh.course.controller.command.impl.result.BedEnrollForCourseHas</realization>
+	</command>
+
+	<command>
+		<name>GET_STUDENT_STUDY</name>
+		<realization>com.sh.course.controller.command.impl.get.GetStudentsStudy</realization>
+	</command>
+
+	<command>
+		<name>GET_STUDENT_FINISH</name>
+		<realization>com.sh.course.controller.command.impl.get.GetStudentsFinish</realization>
+	</command>
+
+	<command>
+		<name>RATE_STUDENT_PAGE</name>
+		<realization>com.sh.course.controller.command.impl.page.RateStudentPage</realization>
+	</command>
+
+	<command>
+		<name>RATE_STUDENT</name>
+		<realization>com.sh.course.controller.command.impl.post.RateStudent</realization>
+	</command>
+
+	<command>
+		<name>GOOD_RATING</name>
+		<realization>com.sh.course.controller.command.impl.result.GoodRating</realization>
+	</command>
+
+	<command>
+		<name>BED_RATING</name>
+		<realization>com.sh.course.controller.command.impl.result.BedRating</realization>
+	</command>
+
+	<command>
+		<name>GET_COURSE_STUDY</name>
+		<realization>com.sh.course.controller.command.impl.get.GetCoursesStudy</realization>
+	</command>
+
+	<command>
+		<name>GET_COURSE_FINISH</name>
+		<realization>com.sh.course.controller.command.impl.get.GetCoursesFinish</realization>
+	</command>
+
+	<command>
+		<name>GET_DIPLOMA</name>
+		<realization>com.sh.course.controller.command.impl.get.GetDiploma</realization>
+	</command>
+
+</commands>

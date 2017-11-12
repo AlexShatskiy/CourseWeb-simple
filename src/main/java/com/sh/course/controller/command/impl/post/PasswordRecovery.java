@@ -1,4 +1,4 @@
-package com.sh.course.controller.command.impl;
+package com.sh.course.controller.command.impl.post;
 
 import java.io.IOException;
 

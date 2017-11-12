@@ -12,7 +12,8 @@ import org.apache.log4j.Logger;
 
 import com.sh.course.controller.command.Command;
 import com.sh.course.controller.command.parameter.PageParameter;
-import com.sh.course.controller.command.provider.CommandProvider;
+import com.sh.course.controller.command.provider.CommandProviderXML;
+import com.sh.course.controller.exception.InitDestroyException;
 import com.sh.course.dao.connection.ConnectionPool;
 import com.sh.course.dao.exception.ConnectionPoolException;
 
@@ -25,7 +26,7 @@ public class Controller extends HttpServlet {
 
 	private static final Logger log = LogManager.getRootLogger();
 
-	private static final CommandProvider provider = new CommandProvider();
+	private static final CommandProviderXML provider = new CommandProviderXML();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,6 +54,7 @@ public class Controller extends HttpServlet {
 			connectionPool.destroyConnectionPool();
 		} catch (ConnectionPoolException e) {
 			log.error(e);
+			throw new InitDestroyException(e);
 		}
 	}
 
@@ -64,6 +66,7 @@ public class Controller extends HttpServlet {
 			connectionPool.initPoolData();
 		} catch (ConnectionPoolException e) {
 			log.error(e);
+			throw new InitDestroyException(e);
 		}
 	}
 }
