@@ -2,6 +2,8 @@ package com.sh.course.controller.command.parameter;
 
 public final class PageParameter {
 	
+	private PageParameter(){}
+	
 	public static final String COMMAND = "command";
 	public static final String EMAIL = "email";
 	public static final String PASSWORD = "password";

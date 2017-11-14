@@ -2,6 +2,8 @@ package com.sh.course.controller.command.parameter;
 
 public final class PageLibrary {
 	
+	private PageLibrary(){}
+	
 	public static final String INDEX = "index.jsp";
 	public static final String SIGN_IN_PAGE = "WEB-INF/jsp/signin.jsp";
 	public static final String REGISTRATION_PAGE = "WEB-INF/jsp/signup.jsp";

@@ -6,11 +6,12 @@ import com.sh.course.domain.Course;
 import com.sh.course.domain.Diploma;
 import com.sh.course.domain.User;
 import com.sh.course.service.exception.ServiceException;
+import com.sh.course.service.exception.ServiceExceptionHas;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 
 public interface DiplomaService {
 	
-	void enrollForCourse(String userId, String courseId, String lecturerId) throws ServiceException, ServiceExceptionInvalidParameter;
+	void enrollForCourse(String userId, String courseId, String lecturerId) throws ServiceException, ServiceExceptionInvalidParameter, ServiceExceptionHas;
 	void rateStudent(String userId, String courseId, String lecturerId, String comment, String rating) throws ServiceException, ServiceExceptionInvalidParameter;
 	
 	List<User> getStudentStudy(String lecturerId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter;

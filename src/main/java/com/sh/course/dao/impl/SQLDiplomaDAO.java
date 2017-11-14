@@ -11,7 +11,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.sh.course.dao.DiplomaDAO;
-import com.sh.course.dao.close.CloseManager;
 import com.sh.course.dao.connection.ConnectionPool;
 import com.sh.course.dao.exception.ConnectionPoolException;
 import com.sh.course.dao.exception.DaoException;
@@ -54,13 +53,13 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 
 			result = preparedStatement.executeUpdate();
 			if (result != RESULT_SUCCESS) {
-				throw new DaoException("");
+				throw new DaoException("fail in enrollForCourse(Diploma diploma)");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in enrollForCourse(Diploma diploma)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -88,13 +87,13 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 			
 			result = preparedStatement.executeUpdate();
 			if (result != RESULT_SUCCESS) {
-				throw new DaoException("");
+				throw new DaoException("fail in rateStudent(Diploma diploma)");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in rateStudent(Diploma diploma)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -127,9 +126,10 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 				students.add(new User(studentId, nickname));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getStudentStudy(int lecturerId, int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return students;
 	}
@@ -163,9 +163,10 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 				students.add(new User(studentId, nickname));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getStudentFinish(int lecturerId, int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return students;
 	}
@@ -201,9 +202,10 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 				courses.add(new Course(courseId, title, content));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getCourseStudy(int userId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return courses;
 	}
@@ -239,9 +241,10 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 				courses.add(new Course(courseId, title, content));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getCourseFinish(int userId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return courses;
 	}
@@ -280,9 +283,10 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 				diploma = new Diploma(userId, courseId, lecturerId, comment, rating, status);
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getDiplomaCourse(int userId, int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return diploma;
 	}
@@ -309,9 +313,10 @@ public class SQLDiplomaDAO implements DiplomaDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in hasDiplomaCourse(int userId, int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return isHasDiplomaCourse;
 	}

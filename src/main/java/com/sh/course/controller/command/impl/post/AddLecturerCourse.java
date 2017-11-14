@@ -16,6 +16,7 @@ import com.sh.course.controller.command.parameter.PageParameter;
 import com.sh.course.controller.command.parameter.SessionAttribute;
 import com.sh.course.service.CourseService;
 import com.sh.course.service.exception.ServiceException;
+import com.sh.course.service.exception.ServiceExceptionHas;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.factory.ServiceFactory;
 
@@ -43,16 +44,10 @@ public class AddLecturerCourse implements Command {
 			response.sendRedirect(PageLibrary.URL_GOOD_ADD_LECTURER_COURSE);
 		} catch (ServiceException e) {
 			log.error(e);
-			try {
-				if (courseService.hasCourseLecturer(lecturerId, courseId)){
-					response.sendRedirect(PageLibrary.URL_GOOD_ADD_LECTURER_COURSE);
-				} else {
-					response.sendRedirect(PageLibrary.URL_BED_ADD_LECTURER_COURSE);
-				}
-			} catch (ServiceException | ServiceExceptionInvalidParameter e1) {
-				log.error(e);
-				response.sendRedirect(PageLibrary.URL_BED_ADD_LECTURER_COURSE);
-			}
+			response.sendRedirect(PageLibrary.URL_BED_ADD_LECTURER_COURSE);
+		} catch (ServiceExceptionHas e) {
+			log.error(e);
+			response.sendRedirect(PageLibrary.URL_GOOD_ADD_LECTURER_COURSE);
 		} catch (ServiceExceptionInvalidParameter e) {
 			log.error(e);
 			response.sendRedirect(PageLibrary.URL_BED_ADD_LECTURER_COURSE);

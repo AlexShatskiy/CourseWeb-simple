@@ -11,7 +11,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.sh.course.dao.CourseDAO;
-import com.sh.course.dao.close.CloseManager;
 import com.sh.course.dao.connection.ConnectionPool;
 import com.sh.course.dao.exception.ConnectionPoolException;
 import com.sh.course.dao.exception.DaoException;
@@ -57,13 +56,13 @@ public class SQLCourseDAO implements CourseDAO {
 
 			result = preparedStatement.executeUpdate();
 			if (result != RESULT_SUCCESS) {
-				throw new DaoException("");
+				throw new DaoException("fail in addCourse(Course course)");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in addCourse(Course course)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -86,13 +85,13 @@ public class SQLCourseDAO implements CourseDAO {
 
 			result = preparedStatement.executeUpdate();
 			if (result != RESULT_SUCCESS) {
-				throw new DaoException("");
+				throw new DaoException("fail in addLecturerCourse(int userId, int courseId)");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in addLecturerCourse(int userId, int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -115,13 +114,13 @@ public class SQLCourseDAO implements CourseDAO {
 
 			result = preparedStatement.executeUpdate();
 			if (result != RESULT_SUCCESS) {
-				throw new DaoException("");
+				throw new DaoException("fail in deleteLecturerCourse(int userId, int courseId)");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in deleteLecturerCourse(int userId, int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -152,9 +151,10 @@ public class SQLCourseDAO implements CourseDAO {
 				courses.add(new Course(courseId, title, content));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getAllCourse()", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return courses;
 	}
@@ -186,9 +186,10 @@ public class SQLCourseDAO implements CourseDAO {
 				courses.add(new Course(courseId, title, content));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getAvailableCourse()", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return courses;
 	}
@@ -221,9 +222,10 @@ public class SQLCourseDAO implements CourseDAO {
 				courses.add(new Course(courseId, title, content));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getAllCourseLecturer(int lecturerId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return courses;
 	}
@@ -259,9 +261,10 @@ public class SQLCourseDAO implements CourseDAO {
 				courses.add(new Course(courseId, title, content));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in searchAvailableCourse(String titleOrContent)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return courses;
 	}
@@ -286,9 +289,10 @@ public class SQLCourseDAO implements CourseDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in hasCourseTitle(String title)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return isHasCourseTitle;
 	}
@@ -315,9 +319,10 @@ public class SQLCourseDAO implements CourseDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in hasCourseLecturer(int lecturerId, int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return isHasCourseTitle;
 	}
@@ -348,9 +353,10 @@ public class SQLCourseDAO implements CourseDAO {
 				lecturers.add(new User(lecturerId, nickname));
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException(e);
+			log.error(e);
+			throw new ConnectionPoolException("fail in getAllLecturerCourse(int courseId)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return lecturers;
 	}

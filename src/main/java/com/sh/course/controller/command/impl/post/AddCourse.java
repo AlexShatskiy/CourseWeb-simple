@@ -14,6 +14,7 @@ import com.sh.course.controller.command.parameter.PageLibrary;
 import com.sh.course.controller.command.parameter.PageParameter;
 import com.sh.course.service.CourseService;
 import com.sh.course.service.exception.ServiceException;
+import com.sh.course.service.exception.ServiceExceptionHas;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.factory.ServiceFactory;
 
@@ -37,17 +38,12 @@ public class AddCourse implements Command {
 			courseService.addCourse(title, content);
 			response.sendRedirect(PageLibrary.URL_GOOD_ADD_COURSE);
 		} catch (ServiceException e) {
-			try {
-				if (courseService.hasCourseTitle(title)){
-					response.sendRedirect(PageLibrary.URL_BED_ADD_HAS_TITLE_COURSE);
-				} else {
-					response.sendRedirect(PageLibrary.URL_BED_ADD_COURSE);
-				}
-			} catch (ServiceException | ServiceExceptionInvalidParameter e1) {
-				log.error(e);
-				response.sendRedirect(PageLibrary.URL_BED_ADD_COURSE);
-			}
-		} catch (ServiceExceptionInvalidParameter e) {
+			log.error(e);
+			response.sendRedirect(PageLibrary.URL_BED_ADD_COURSE);
+		} catch (ServiceExceptionHas e) {
+			log.error(e);
+			response.sendRedirect(PageLibrary.URL_BED_ADD_HAS_TITLE_COURSE);
+		}catch (ServiceExceptionInvalidParameter e) {
 			log.error(e);
 			response.sendRedirect(PageLibrary.URL_BED_ADD_INVALID_COURSE);
 		}

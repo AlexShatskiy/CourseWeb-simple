@@ -15,6 +15,7 @@ import com.sh.course.domain.Diploma;
 import com.sh.course.domain.User;
 import com.sh.course.service.DiplomaService;
 import com.sh.course.service.exception.ServiceException;
+import com.sh.course.service.exception.ServiceExceptionHas;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.validator.ParameterValidator;
 
@@ -24,7 +25,7 @@ public class DiplomaServiceImpl implements DiplomaService {
 
 	@Override
 	public void enrollForCourse(String userId, String courseId, String lecturerId)
-			throws ServiceException, ServiceExceptionInvalidParameter {
+			throws ServiceException, ServiceExceptionInvalidParameter, ServiceExceptionHas{
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
@@ -34,11 +35,15 @@ public class DiplomaServiceImpl implements DiplomaService {
 			throw new ServiceExceptionInvalidParameter();
 		}
 		
+		if (hasDiplomaCourse(userId, courseId)){
+			throw new ServiceExceptionHas("fail in enrollForCourse(String userId, String courseId, String lecturerId)");
+		}
+		
 		try {
 			diplomaDAO.enrollForCourse(new Diploma(Integer.parseInt(userId), Integer.parseInt(courseId), Integer.parseInt(lecturerId)));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in enrollForCourse(String userId, String courseId, String lecturerId)", e);
 		}
 	}
 
@@ -51,14 +56,14 @@ public class DiplomaServiceImpl implements DiplomaService {
 		
 		if (!ParameterValidator.isIdValid(userId) || !ParameterValidator.isIdValid(courseId) || !ParameterValidator.isIdValid(lecturerId) || 
 				!ParameterValidator.isTextValid(comment) || !ParameterValidator.isRatingValid(rating)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in rateStudent(String userId, String courseId, String lecturerId, String comment, String rating)");
 		}
 		
 		try {
 			diplomaDAO.rateStudent(new Diploma(Integer.parseInt(userId), Integer.parseInt(courseId), Integer.parseInt(lecturerId), comment, Integer.parseInt(rating)));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in rateStudent(String userId, String courseId, String lecturerId, String comment, String rating)", e);
 		}
 	}
 
@@ -72,14 +77,14 @@ public class DiplomaServiceImpl implements DiplomaService {
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
 		
 		if (!ParameterValidator.isIdValid(lecturerId) || !ParameterValidator.isIdValid(courseId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in getStudentStudy(String lecturerId, String courseId)");
 		}
 		
 		try {
 			students = diplomaDAO.getStudentStudy(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getStudentStudy(String lecturerId, String courseId)", e);
 		}
 		return students;
 	}
@@ -94,14 +99,14 @@ public class DiplomaServiceImpl implements DiplomaService {
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
 		
 		if (!ParameterValidator.isIdValid(lecturerId) || !ParameterValidator.isIdValid(courseId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in getStudentFinish(String lecturerId, String courseId)");
 		}
 		
 		try {
 			students = diplomaDAO.getStudentFinish(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getStudentFinish(String lecturerId, String courseId)", e);
 		}
 		return students;
 	}
@@ -115,14 +120,14 @@ public class DiplomaServiceImpl implements DiplomaService {
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
 		
 		if (!ParameterValidator.isIdValid(userId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in getCourseStudy(String userId)");
 		}
 		
 		try {
 			courses = diplomaDAO.getCourseStudy(Integer.parseInt(userId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getCourseStudy(String userId)", e);
 		}
 		return courses;
 	}
@@ -136,14 +141,14 @@ public class DiplomaServiceImpl implements DiplomaService {
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
 		
 		if (!ParameterValidator.isIdValid(userId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in getCourseFinish(String userId)");
 		}
 		
 		try {
 			courses = diplomaDAO.getCourseFinish(Integer.parseInt(userId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getCourseFinish(String userId)", e);
 		}
 		return courses;
 	}
@@ -158,14 +163,14 @@ public class DiplomaServiceImpl implements DiplomaService {
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
 		
 		if (!ParameterValidator.isIdValid(userId) || !ParameterValidator.isIdValid(courseId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in getDiplomaCourse(String userId, String courseId)");
 		}
 		
 		try {
 			diploma = diplomaDAO.getDiplomaCourse(Integer.parseInt(userId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getDiplomaCourse(String userId, String courseId)", e);
 		}
 		return diploma;
 	}
@@ -180,14 +185,14 @@ public class DiplomaServiceImpl implements DiplomaService {
 		DiplomaDAO diplomaDAO = factory.getDiplomaDAO();
 		
 		if (!ParameterValidator.isIdValid(userId) || !ParameterValidator.isIdValid(courseId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in hasDiplomaCourse(String userId, String courseId)");
 		}
 		
 		try {
 			result = diplomaDAO.hasDiplomaCourse(Integer.parseInt(userId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in hasDiplomaCourse(String userId, String courseId)", e);
 		}
 		return result;
 	}

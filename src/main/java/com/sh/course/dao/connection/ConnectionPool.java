@@ -9,6 +9,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.NClob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
@@ -30,6 +31,7 @@ import com.sh.course.dao.connection.manager.DBResourceManager;
 import com.sh.course.dao.exception.ConnectionPoolException;
 
 public final class ConnectionPool {
+	
 	private static final Logger log = LogManager.getRootLogger();
 	private final static ConnectionPool instance = new ConnectionPool();
 
@@ -77,10 +79,10 @@ public final class ConnectionPool {
 			}
 
 		} catch (ClassNotFoundException e) {
-
+			log.error(e);
 			throw new ConnectionPoolException("ClassNotFoundException in ConnectionPool", e);
 		} catch (SQLException e) {
-
+			log.error(e);
 			throw new ConnectionPoolException("SQLException in ConnectionPool", e);
 		}
 	}
@@ -92,7 +94,7 @@ public final class ConnectionPool {
 			connection = connectionQueue.take();
 			givenAwayConQueue.add(connection);
 		} catch (InterruptedException e) {
-
+			log.error(e);
 			throw new ConnectionPoolException("InterruptedException in ConnectionPool", e);
 		}
 		return connection;
@@ -108,7 +110,7 @@ public final class ConnectionPool {
 			closeConnectionsQueue(givenAwayConQueue);
 			closeConnectionsQueue(connectionQueue);
 		} catch (SQLException e) {
-
+			log.error(e);
 			throw new ConnectionPoolException("SQLException in ConnectionPool.clearConnectionQueue()", e);
 		}
 	}
@@ -120,6 +122,33 @@ public final class ConnectionPool {
 				connection.commit();
 			}
 			((PooledConnection) connection).reallyClose();
+		}
+	}
+	
+	public static void closeConnect(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) throws ConnectionPoolException{
+		if (resultSet != null) {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				log.error(e);
+				throw new ConnectionPoolException("fail in closeConnect(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet)", e);
+			}
+		}
+		if (preparedStatement != null) {
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				log.error(e);
+				throw new ConnectionPoolException("fail in closeConnect(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet)", e);
+			}
+		}
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				log.error(e);
+				throw new ConnectionPoolException("fail in closeConnect(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet)", e);
+			}
 		}
 	}
 

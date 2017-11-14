@@ -5,9 +5,13 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class CourseTag extends TagSupport{
+	
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = LogManager.getRootLogger();
 	
 	private String myValue;
     
@@ -19,8 +23,9 @@ public class CourseTag extends TagSupport{
     public int doStartTag() throws JspException {
         try {
             pageContext.getOut().print( "hello! " + this.myValue );
-        } catch(IOException ioException) {
-            throw new JspException("Error: " + ioException.getMessage());
+        } catch(IOException e) {
+        	log.error(e);
+            throw new JspException("Error: doStartTag()" + e.getMessage());
         }       
         return SKIP_BODY;
     }

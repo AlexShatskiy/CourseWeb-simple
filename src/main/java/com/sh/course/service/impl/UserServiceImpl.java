@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
 		User user = null;
 
 		if (!ParameterValidator.isEmailValid(email) || !ParameterValidator.isPasswordValid(password)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in signIn(String email, String password)");
 		}
 
 		DAOFactory factory = DAOFactory.getInstance();
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 			user = userDAO.signIn(email, password);
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in signIn(String email, String password)", e);
 		}
 		return user;
 	}
@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService{
 		User user = null;
 
 		if (!ParameterValidator.isEmailValid(email) || !ParameterValidator.isPasswordValid(password) || !ParameterValidator.isNicknameValid(nickname)) {
-			System.out.println("dfdfd");
 			throw new ServiceExceptionInvalidParameter("Not valid parameters in UserServiceImpl");
 		}
 
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService{
 			user = userDAO.checkIn(email, password, nickname);
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in checkIn(String email, String password, String nickname)", e);
 		}
 		return user;
 	}
@@ -77,7 +76,7 @@ public class UserServiceImpl implements UserService{
 			isHasEmail = userDAO.hasEmail(email);
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in hasEmail(String email)", e);
 		}
 		return isHasEmail;
 	}
@@ -97,7 +96,7 @@ public class UserServiceImpl implements UserService{
 			isHasNickname = userDAO.hasNickname(nickname);
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in hasNickname(String nickname)", e);
 		}
 		return isHasNickname;
 	}
@@ -129,7 +128,7 @@ public class UserServiceImpl implements UserService{
 			userId = userDAO.getUserId(email);
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getUserId(String email)", e);
 		}
 		return userId;
 	}

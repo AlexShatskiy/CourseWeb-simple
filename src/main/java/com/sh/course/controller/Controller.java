@@ -17,17 +17,26 @@ import com.sh.course.controller.exception.InitDestroyException;
 import com.sh.course.dao.connection.ConnectionPool;
 import com.sh.course.dao.exception.ConnectionPoolException;
 
+/**
+ * handles all get and post requests
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class Controller extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger log = LogManager.getRootLogger();
-
+	/**
+	 * attribute - command provider
+	 */
 	private static final CommandProviderXML provider = new CommandProviderXML();
 
+	/**
+	 * handles all get requests
+	 * @param request
+	 * @param response
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -37,6 +46,11 @@ public class Controller extends HttpServlet {
 		command.execute(request, response);
 	}
 
+	/**
+	 * handles all post requests
+	 * @param request
+	 * @param response
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,6 +61,9 @@ public class Controller extends HttpServlet {
 		command.execute(request, response);
 	}
 
+	/**
+	 * destroy HttpServlet and ConnectionPool
+	 */
 	@Override
 	public void destroy() {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -54,10 +71,13 @@ public class Controller extends HttpServlet {
 			connectionPool.destroyConnectionPool();
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new InitDestroyException(e);
+			throw new InitDestroyException("fail in destroy()", e);
 		}
 	}
 
+	/**
+	 * init HttpServlet and ConnectionPool
+	 */
 	@Override
 	public void init() throws ServletException {
 
@@ -66,7 +86,7 @@ public class Controller extends HttpServlet {
 			connectionPool.initPoolData();
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new InitDestroyException(e);
+			throw new InitDestroyException("fail in init()", e);
 		}
 	}
 }

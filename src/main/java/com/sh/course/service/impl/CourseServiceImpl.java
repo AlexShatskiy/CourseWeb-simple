@@ -14,6 +14,7 @@ import com.sh.course.domain.Course;
 import com.sh.course.domain.User;
 import com.sh.course.service.CourseService;
 import com.sh.course.service.exception.ServiceException;
+import com.sh.course.service.exception.ServiceExceptionHas;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.validator.ParameterValidator;
 
@@ -32,13 +33,13 @@ public class CourseServiceImpl implements CourseService {
 			course = courseDAO.getAvailableCourse();
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getAvailableCourse()", e);
 		}
 		return course;
 	}
 
 	@Override
-	public void addCourse(String title, String content) throws ServiceException, ServiceExceptionInvalidParameter {
+	public void addCourse(String title, String content) throws ServiceException, ServiceExceptionInvalidParameter, ServiceExceptionHas {
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		CourseDAO courseDAO = factory.getCourseDAO();
@@ -47,48 +48,60 @@ public class CourseServiceImpl implements CourseService {
 			throw new ServiceExceptionInvalidParameter();
 		}
 		
+		if (hasCourseTitle(title)){
+			throw new ServiceExceptionHas();
+		}
+		
 		try {
 			courseDAO.addCourse(new Course(title, content));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in addCourse(String title, String content)", e);
 		}	
 	}
 
 	@Override
-	public void addLecturerCourse(String lecturerId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter {
+	public void addLecturerCourse(String lecturerId, String courseId) throws ServiceException, ServiceExceptionInvalidParameter, ServiceExceptionHas{
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
 		if (!ParameterValidator.isIdValid(lecturerId) || !ParameterValidator.isIdValid(courseId)) {
 			throw new ServiceExceptionInvalidParameter();
+		}
+		
+		if (hasCourseLecturer(lecturerId, courseId)){
+			throw new ServiceExceptionHas("fail in addLecturerCourse(String lecturerId, String courseId)");
 		}
 		
 		try {
 			courseDAO.addLecturerCourse(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in addLecturerCourse(String lecturerId, String courseId)", e);
 		}
 	}
 
 	@Override
 	public void deleteLecturerCourse(String lecturerId, String courseId)
-			throws ServiceException, ServiceExceptionInvalidParameter {
+			throws ServiceException, ServiceExceptionInvalidParameter, ServiceExceptionHas {
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
 		if (!ParameterValidator.isIdValid(lecturerId) || !ParameterValidator.isIdValid(courseId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in deleteLecturerCourse(String lecturerId, String courseId)");
+		}
+		
+		if (hasCourseLecturer(lecturerId, courseId)){
+			throw new ServiceExceptionHas("fail in deleteLecturerCourse(String lecturerId, String courseId)");
 		}
 		
 		try {
 			courseDAO.deleteLecturerCourse(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException | DaoException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in deleteLecturerCourse(String lecturerId, String courseId)", e);
 		}
 	}
 
@@ -103,7 +116,7 @@ public class CourseServiceImpl implements CourseService {
 			course = courseDAO.getAllCourse();
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getAllCourse()", e);
 		}
 		return course;
 	}
@@ -117,14 +130,14 @@ public class CourseServiceImpl implements CourseService {
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
 		if (!ParameterValidator.isIdValid(lecturerId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in getAllCourseLecturer(String lecturerId)");
 		}
 		
 		try {
 			course = courseDAO.getAllCourseLecturer(Integer.parseInt(lecturerId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getAllCourseLecturer(String lecturerId)", e);
 		}
 		return course;
 	}
@@ -138,14 +151,14 @@ public class CourseServiceImpl implements CourseService {
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
 		if (!ParameterValidator.isIdValid(courseId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in getAllLecturerCourse(String courseId)");
 		}
 		
 		try {
 			lecturers = courseDAO.getAllLecturerCourse(Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in getAllLecturerCourse(String courseId)", e);
 		}
 		return lecturers;
 	}
@@ -160,14 +173,14 @@ public class CourseServiceImpl implements CourseService {
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
 		if (!ParameterValidator.isTextValid(titleOrContent)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in searchAvailableCourse(String titleOrContent)");
 		}
 		
 		try {
 			courses = courseDAO.searchAvailableCourse(titleOrContent);
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in searchAvailableCourse(String titleOrContent)", e);
 		}
 		return courses;
 	}
@@ -181,14 +194,14 @@ public class CourseServiceImpl implements CourseService {
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
 		if (!ParameterValidator.isTextValid(title)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in hasCourseTitle(String title)");
 		}
 		
 		try {
 			result = courseDAO.hasCourseTitle(title);
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in hasCourseTitle(String title)", e);
 		}
 		return result;
 	}
@@ -203,14 +216,14 @@ public class CourseServiceImpl implements CourseService {
 		CourseDAO courseDAO = factory.getCourseDAO();
 		
 		if (!ParameterValidator.isIdValid(lecturerId) || !ParameterValidator.isIdValid(courseId)) {
-			throw new ServiceExceptionInvalidParameter();
+			throw new ServiceExceptionInvalidParameter("fail in hasCourseLecturer(String lecturerId, String courseId)");
 		}
 		
 		try {
 			result = courseDAO.hasCourseLecturer(Integer.parseInt(lecturerId), Integer.parseInt(courseId));
 		} catch (ConnectionPoolException e) {
 			log.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException("fail in hasCourseLecturer(String lecturerId, String courseId)", e);
 		}
 		return result;
 	}

@@ -4,5 +4,4 @@ public enum DiplomaStatus {
 	
 	STUDY, 
 	FINISH
-	
 }

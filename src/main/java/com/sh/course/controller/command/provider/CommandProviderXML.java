@@ -35,7 +35,7 @@ public class CommandProviderXML {
 			commands = getCommandsMap(reader);
 		} catch (XMLStreamException e) {
 			log.error(e);
-			throw new ControllerException(e);
+			throw new ControllerException("fail in CommandProviderXML()", e);
 		}
 	}
 
@@ -96,7 +96,7 @@ public class CommandProviderXML {
 			command = (Command) c.newInstance();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			log.error(e);
-			throw new ControllerException(e);
+			throw new ControllerException("fail in commandCreator(String text)", e);
 		}
 		return command;
 	}

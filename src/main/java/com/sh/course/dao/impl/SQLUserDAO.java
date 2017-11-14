@@ -9,12 +9,10 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.sh.course.dao.UserDAO;
-import com.sh.course.dao.close.CloseManager;
 import com.sh.course.dao.connection.ConnectionPool;
 import com.sh.course.dao.exception.ConnectionPoolException;
 import com.sh.course.domain.User;
 import com.sh.course.domain.parameter.Role;
-
 
 public class SQLUserDAO implements UserDAO {
 	private static final Logger log = LogManager.getRootLogger();
@@ -60,9 +58,9 @@ public class SQLUserDAO implements UserDAO {
 
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in signIn(String email, String password)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return user;
 	}
@@ -93,9 +91,9 @@ public class SQLUserDAO implements UserDAO {
 			user = new User(userId, email, nickname, Role.USER);
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in checkIn(String email, String password, String nickname)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return user;
 	}
@@ -122,9 +120,9 @@ public class SQLUserDAO implements UserDAO {
 
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in hasEmail(String email)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return isHasEmail;
 	}
@@ -151,9 +149,9 @@ public class SQLUserDAO implements UserDAO {
 
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in hasNickname(String nickname)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return isHasNickname;
 	}
@@ -179,9 +177,9 @@ public class SQLUserDAO implements UserDAO {
 
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in getPassword(String email)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return passwordSQL;
 	}
@@ -208,9 +206,9 @@ public class SQLUserDAO implements UserDAO {
 
 		} catch (SQLException e) {
 			log.error(e);
-			throw new ConnectionPoolException(e);
+			throw new ConnectionPoolException("fail in getUserId(String email)", e);
 		} finally {
-			CloseManager.closeConnect(connection, preparedStatement, resultSet);
+			ConnectionPool.closeConnect(connection, preparedStatement, resultSet);
 		}
 		return userIdSQL;
 	}
