@@ -3,6 +3,10 @@ package com.sh.course.service.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public final class ParameterValidator {
 	
 	private ParameterValidator() {

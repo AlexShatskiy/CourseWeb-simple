@@ -7,7 +7,10 @@ import com.sh.course.dao.exception.DaoException;
 import com.sh.course.domain.Course;
 import com.sh.course.domain.User;
 
-
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public interface CourseDAO {
 	void addCourse(Course course) throws ConnectionPoolException, DaoException;
 	void addLecturerCourse(int userId, int courseId) throws ConnectionPoolException, DaoException;

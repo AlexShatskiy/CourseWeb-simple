@@ -1,5 +1,9 @@
 package com.sh.course.dao.connection.manager;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class DBParameter {
 	
 	private DBParameter() {}

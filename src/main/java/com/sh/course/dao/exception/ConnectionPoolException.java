@@ -1,5 +1,9 @@
 package com.sh.course.dao.exception;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class ConnectionPoolException extends Exception {
 
 	private static final long serialVersionUID = 1L;

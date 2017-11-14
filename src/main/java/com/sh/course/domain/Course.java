@@ -1,5 +1,9 @@
 package com.sh.course.domain;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class Course {
 	
 	private Integer courseId;

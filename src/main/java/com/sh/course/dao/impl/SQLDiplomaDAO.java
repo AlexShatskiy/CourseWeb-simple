@@ -19,6 +19,10 @@ import com.sh.course.domain.Diploma;
 import com.sh.course.domain.User;
 import com.sh.course.domain.parameter.DiplomaStatus;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class SQLDiplomaDAO implements DiplomaDAO {
 	private static final Logger log = LogManager.getRootLogger();
 

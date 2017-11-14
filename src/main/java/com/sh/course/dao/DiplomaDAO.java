@@ -8,6 +8,10 @@ import com.sh.course.domain.Course;
 import com.sh.course.domain.Diploma;
 import com.sh.course.domain.User;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public interface DiplomaDAO {
 	
 	void enrollForCourse(Diploma diploma) throws DaoException, ConnectionPoolException;

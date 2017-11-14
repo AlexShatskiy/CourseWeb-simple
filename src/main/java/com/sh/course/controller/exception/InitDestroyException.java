@@ -1,5 +1,9 @@
 package com.sh.course.controller.exception;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class InitDestroyException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 

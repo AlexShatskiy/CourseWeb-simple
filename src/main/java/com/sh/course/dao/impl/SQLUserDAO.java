@@ -14,6 +14,10 @@ import com.sh.course.dao.exception.ConnectionPoolException;
 import com.sh.course.domain.User;
 import com.sh.course.domain.parameter.Role;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class SQLUserDAO implements UserDAO {
 	private static final Logger log = LogManager.getRootLogger();
 	

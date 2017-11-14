@@ -1,5 +1,10 @@
 package com.sh.course.controller.command.parameter;
 
+/**
+ * command names
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 @Deprecated
 public enum CommandName {
 	SIGN_IN_PAGE,

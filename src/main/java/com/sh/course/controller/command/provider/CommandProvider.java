@@ -43,6 +43,10 @@ import com.sh.course.controller.command.impl.result.GoodEnrollForCourse;
 import com.sh.course.controller.command.impl.result.GoodRating;
 import com.sh.course.controller.command.parameter.CommandName;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 @Deprecated
 public class CommandProvider {
 

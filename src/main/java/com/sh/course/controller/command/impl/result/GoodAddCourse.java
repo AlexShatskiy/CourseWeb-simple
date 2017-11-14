@@ -11,6 +11,10 @@ import com.sh.course.controller.command.Command;
 import com.sh.course.controller.command.parameter.PageLibrary;
 import com.sh.course.controller.command.parameter.PageSetAttribute;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class GoodAddCourse implements Command {
 
 	@Override

@@ -7,6 +7,10 @@ import com.sh.course.service.impl.CourseServiceImpl;
 import com.sh.course.service.impl.DiplomaServiceImpl;
 import com.sh.course.service.impl.UserServiceImpl;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class ServiceFactory {
 	private final static ServiceFactory instance = new ServiceFactory();
 	

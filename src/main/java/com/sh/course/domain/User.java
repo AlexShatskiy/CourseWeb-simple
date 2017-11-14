@@ -2,6 +2,10 @@ package com.sh.course.domain;
 
 import com.sh.course.domain.parameter.Role;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class User {
 
 	private Integer userId;

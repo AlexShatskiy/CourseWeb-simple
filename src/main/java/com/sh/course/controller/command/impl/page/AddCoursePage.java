@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.sh.course.controller.command.Command;
 import com.sh.course.controller.command.parameter.PageLibrary;
 
-
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class AddCoursePage implements Command {
 
 	@Override

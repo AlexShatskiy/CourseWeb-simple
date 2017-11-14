@@ -16,6 +16,10 @@ import com.sh.course.controller.command.Command;
 import com.sh.course.controller.command.parameter.CommandTagName;
 import com.sh.course.controller.exception.ControllerException;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class CommandProviderXML {
 	
 	private static final Logger log = LogManager.getRootLogger();

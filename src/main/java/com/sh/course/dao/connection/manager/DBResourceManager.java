@@ -2,6 +2,10 @@ package com.sh.course.dao.connection.manager;
 
 import java.util.ResourceBundle;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class DBResourceManager {
 	
 	private static final String FILE_NAME = "db";

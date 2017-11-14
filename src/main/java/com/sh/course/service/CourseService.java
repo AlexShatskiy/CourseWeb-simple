@@ -8,7 +8,10 @@ import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionHas;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 
-
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public interface CourseService {
 
 	void addCourse(String title, String content) throws ServiceException, ServiceExceptionInvalidParameter, ServiceExceptionHas;

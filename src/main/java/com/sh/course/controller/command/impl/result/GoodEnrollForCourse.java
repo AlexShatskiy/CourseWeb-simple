@@ -14,6 +14,10 @@ import com.sh.course.controller.command.parameter.PageSetAttribute;
 import com.sh.course.controller.command.parameter.SessionAttribute;
 import com.sh.course.domain.parameter.Role;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class GoodEnrollForCourse implements Command {
 
 	@Override

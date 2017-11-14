@@ -7,6 +7,10 @@ import com.sh.course.dao.impl.SQLCourseDAO;
 import com.sh.course.dao.impl.SQLDiplomaDAO;
 import com.sh.course.dao.impl.SQLUserDAO;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class DAOFactory {
 private static final DAOFactory instance = new DAOFactory();
 	

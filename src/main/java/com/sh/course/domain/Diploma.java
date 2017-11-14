@@ -2,6 +2,10 @@ package com.sh.course.domain;
 
 import com.sh.course.domain.parameter.DiplomaStatus;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class Diploma {
 
 	private int userId;

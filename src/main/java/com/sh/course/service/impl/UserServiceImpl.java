@@ -12,7 +12,10 @@ import com.sh.course.dao.exception.ConnectionPoolException;
 import com.sh.course.dao.factory.DAOFactory;
 import com.sh.course.domain.User;
 
-
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class UserServiceImpl implements UserService{
 	
 	private static final Logger log = LogManager.getRootLogger();

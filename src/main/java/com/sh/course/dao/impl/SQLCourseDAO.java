@@ -17,6 +17,10 @@ import com.sh.course.dao.exception.DaoException;
 import com.sh.course.domain.Course;
 import com.sh.course.domain.User;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class SQLCourseDAO implements CourseDAO {
 
 	private static final Logger log = LogManager.getRootLogger();

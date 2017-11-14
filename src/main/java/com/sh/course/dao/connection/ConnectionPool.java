@@ -30,6 +30,10 @@ import com.sh.course.dao.connection.manager.DBParameter;
 import com.sh.course.dao.connection.manager.DBResourceManager;
 import com.sh.course.dao.exception.ConnectionPoolException;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public final class ConnectionPool {
 	
 	private static final Logger log = LogManager.getRootLogger();

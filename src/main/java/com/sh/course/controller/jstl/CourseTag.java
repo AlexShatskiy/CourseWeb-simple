@@ -8,6 +8,10 @@ import javax.servlet.jsp.tagext.TagSupport;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class CourseTag extends TagSupport{
 	
 	private static final long serialVersionUID = 1L;

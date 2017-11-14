@@ -23,6 +23,10 @@ import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.factory.ServiceFactory;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class GetStudentsFinish implements Command {
 	
 	private static final Logger log = LogManager.getRootLogger();

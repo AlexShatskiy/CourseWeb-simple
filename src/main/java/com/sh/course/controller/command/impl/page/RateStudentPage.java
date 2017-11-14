@@ -12,6 +12,10 @@ import com.sh.course.controller.command.parameter.PageLibrary;
 import com.sh.course.controller.command.parameter.PageParameter;
 import com.sh.course.controller.command.parameter.PageSetAttribute;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class RateStudentPage implements Command {
 
 	@Override

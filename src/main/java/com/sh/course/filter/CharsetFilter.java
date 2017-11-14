@@ -10,6 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class CharsetFilter implements Filter {
 
 	private String encoding;

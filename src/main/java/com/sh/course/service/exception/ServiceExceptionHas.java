@@ -1,5 +1,9 @@
 package com.sh.course.service.exception;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class ServiceExceptionHas extends Exception {
 	private static final long serialVersionUID = 1L;
 

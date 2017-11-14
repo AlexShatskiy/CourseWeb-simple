@@ -18,6 +18,10 @@ import com.sh.course.service.exception.ServiceExceptionHas;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 import com.sh.course.service.validator.ParameterValidator;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class CourseServiceImpl implements CourseService {
 	
 	private static final Logger log = LogManager.getRootLogger();

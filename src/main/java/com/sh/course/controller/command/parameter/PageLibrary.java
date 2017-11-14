@@ -1,5 +1,10 @@
 package com.sh.course.controller.command.parameter;
 
+/**
+ * jsp page links and result command
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public final class PageLibrary {
 	
 	private PageLibrary(){}

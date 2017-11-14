@@ -11,6 +11,10 @@ import com.sh.course.controller.command.Command;
 import com.sh.course.controller.command.parameter.PageLibrary;
 import com.sh.course.controller.command.parameter.SessionAttribute;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class SignOut implements Command {
 
 	@Override

@@ -1,5 +1,9 @@
 package com.sh.course.controller.command.parameter;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public class PageSetAttribute {
 	
 	private PageSetAttribute(){}

@@ -1,5 +1,10 @@
 package com.sh.course.controller.command.parameter;
 
+/**
+ * parameter on the jsp page
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public final class PageParameter {
 	
 	private PageParameter(){}

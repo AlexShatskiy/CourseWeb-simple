@@ -4,6 +4,10 @@ import com.sh.course.domain.User;
 import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 
+/**
+ * @author Shatskiy Alex
+ * @version 1.0
+ */
 public interface UserService {
 	
 	User signIn(String email, String password) throws ServiceException, ServiceExceptionInvalidParameter;
