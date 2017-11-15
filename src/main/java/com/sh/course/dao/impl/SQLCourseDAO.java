@@ -54,7 +54,7 @@ public class SQLCourseDAO implements CourseDAO {
 
 		try {
 			preparedStatement = connection.prepareStatement(ADD_COURSE);
-
+			
 			preparedStatement.setString(1, course.getTitle());
 			preparedStatement.setString(2, course.getContent());
 

@@ -14,15 +14,55 @@ import com.sh.course.domain.User;
  */
 public interface DiplomaDAO {
 	
+	/**
+	 * enroll for course in database
+	 * @param diploma
+	 */
 	void enrollForCourse(Diploma diploma) throws DaoException, ConnectionPoolException;
+	
+	/**
+	 * rate student in database
+	 * @param diploma
+	 */
 	void rateStudent(Diploma diploma) throws DaoException, ConnectionPoolException;
 	
+	/**
+	 * return students study course
+	 * @param lecturerId
+	 * @param courseId
+	 */
 	List<User> getStudentStudy(int lecturerId, int courseId) throws ConnectionPoolException;
+	
+	/**
+	 * return students finish course
+	 * @param lecturerId
+	 * @param courseId
+	 */
 	List<User> getStudentFinish(int lecturerId, int courseId) throws ConnectionPoolException;
 	
+	/**
+	 * return courses study
+	 * @param userId
+	 */
 	List<Course> getCourseStudy(int userId) throws ConnectionPoolException;
+	
+	/**
+	 * return courses finish
+	 * @param userId
+	 */
 	List<Course> getCourseFinish(int userId) throws ConnectionPoolException;
 	
+	/**
+	 * return diploma
+	 * @param userId
+	 * @param courseId
+	 */
 	Diploma getDiplomaCourse(int userId, int courseId) throws ConnectionPoolException;
+	
+	/**
+	 * checks diploma
+	 * @param userId
+	 * @param courseId
+	 */
 	boolean hasDiplomaCourse(int userId, int courseId) throws ConnectionPoolException;
 }

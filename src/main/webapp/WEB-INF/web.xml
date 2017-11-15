@@ -32,5 +32,16 @@
 		<filter-name>CharsetFilter</filter-name>
 		<url-pattern>/controller</url-pattern>
 	</filter-mapping>
-
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/jsp/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/jsp/error.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>by.htp.libsite.controller.exception.InitDestroyException</exception-type>
+		<location>/WEB-INF/jsp/error.jsp</location>
+	</error-page>
 </web-app>

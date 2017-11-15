@@ -5,6 +5,7 @@ import com.sh.course.service.exception.ServiceException;
 import com.sh.course.service.exception.ServiceExceptionInvalidParameter;
 
 /**
+ * Сhecks the parameters and passes control to the dao layer
  * @author Shatskiy Alex
  * @version 1.0
  */

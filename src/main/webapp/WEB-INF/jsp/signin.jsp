@@ -139,45 +139,6 @@
 			<!-- /Article -->
 		</div>
 		
-		
-		
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="lect1@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass1" />
-				<button type="submit" class="btn-link">
-					lect1
-				</button>
-			</form>
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="lect2@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass2" />
-				<button type="submit" class="btn-link">
-					lect2
-				</button>
-			</form>
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="stud4@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass4" />
-				<button type="submit" class="btn-link">
-					stud4
-				</button>
-			</form>
-			<form method="post" action="controller">
-			 	<input type="hidden" name="command" value="SIGN_IN" />
-			 	<input type="hidden" name="email" value="stud5@gmail.com" />
-			 	 <input type="hidden" name="password" value="pass5" />
-				<button type="submit" class="btn-link">
-					stud5
-				</button>
-			</form>
-		
-		
-		
-		
-
 	</div>	<!-- /container -->
 	
 	<footer id="footer" class="top-space">

@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /**
+ * custom tag
  * @author Shatskiy Alex
  * @version 1.0
  */

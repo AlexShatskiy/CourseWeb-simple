@@ -31,6 +31,7 @@ import com.sh.course.dao.connection.manager.DBResourceManager;
 import com.sh.course.dao.exception.ConnectionPoolException;
 
 /**
+ * Сonnect to the database
  * @author Shatskiy Alex
  * @version 1.0
  */

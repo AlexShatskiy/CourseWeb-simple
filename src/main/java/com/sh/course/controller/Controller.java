@@ -19,6 +19,7 @@ import com.sh.course.dao.exception.ConnectionPoolException;
 
 /**
  * handles all get and post requests
+ * 
  * @author Shatskiy Alex
  * @version 1.0
  */
@@ -34,12 +35,16 @@ public class Controller extends HttpServlet {
 
 	/**
 	 * handles all get requests
+	 * 
 	 * @param request
 	 * @param response
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType ("text/html; charset=UTF-8");
 		String commandName = request.getParameter(PageParameter.COMMAND);
 
 		Command command = provider.getCommand(commandName);
@@ -48,13 +53,16 @@ public class Controller extends HttpServlet {
 
 	/**
 	 * handles all post requests
+	 * 
 	 * @param request
 	 * @param response
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType ("text/html; charset=UTF-8");
 		String commandName = request.getParameter(PageParameter.COMMAND);
 
 		Command command = provider.getCommand(commandName);
