@@ -1,0 +1,70 @@
+CREATE TABLE user
+(user_id INT UNSIGNED AUTO_INCREMENT,
+email VARCHAR(255) NOT NULL UNIQUE,
+password VARCHAR(30),
+nickname VARCHAR(20) NOT NULL UNIQUE,
+role ENUM('LECTURER', 'USER'),
+CONSTRAINT pk_user PRIMARY KEY (user_id));
+
+
+
+//
+CREATE TABLE course
+(course_id INT UNSIGNED AUTO_INCREMENT primary key,
+title varchar(255) not null,
+content mediumtext,
+status enum('ADDED', 'REMUVED'),
+user_id INT UNSIGNED,
+foreign key (user_id) references user(user_id));
+
+//
+
+
+insert into course(title, content, status, user_id)
+values('tttt', 'ccc', 'ADDED', 2);
+
+///new
+CREATE TABLE user
+(id INT UNSIGNED AUTO_INCREMENT primary key,
+email VARCHAR(255) NOT NULL UNIQUE,
+password VARCHAR(30),
+nickname VARCHAR(20) NOT NULL UNIQUE,
+role ENUM('LECTURER', 'USER'));
+
+CREATE TABLE course
+(id INT UNSIGNED AUTO_INCREMENT primary key,
+title varchar(255) not null unique,
+content mediumtext);
+
+CREATE TABLE user_course
+(user_id INT UNSIGNED,
+course_id INT UNSIGNED,
+foreign key (user_id) references user(id),
+foreign key (course_id) references course(id),
+CONSTRAINT pk_user_course PRIMARY KEY (user_id, course_id));
+
+CREATE TABLE diploma
+(user_id INT UNSIGNED,
+course_id INT UNSIGNED,
+lecturer_id INT UNSIGNED,
+foreign key (user_id) references user(id),
+foreign key (course_id) references course(id),
+foreign key (lecturer_id) references user(id),
+comment mediumtext,
+rating INT UNSIGNED,
+status ENUM('STUDY', 'FINISH'),
+CONSTRAINT pk_diploma PRIMARY KEY (user_id, course_id));
+
+insert into diploma(user_id, course_id, lecturer_id, comment, rating, status)
+values(1, 4, 3, 'ccccc', 10, 'STUDY');
+
+update diploma set comment = 'new9', rating = 9 where user_id =1 and course_id = 4 and lecturer_id = 3
+
+
+<input type="text" value="" data-nb-type="simple" class="nb-input _nb-simple-input _init head__suggest-input ui-autocomplete-input" autocomplete="off" name="text" tabindex="1" 
+data-nb="input" id="nb-2">
+
+
+insert into user(email, password, nickname, role)
+values('alex@gmail.com', 'qqqqq', 'Alex Sh', 'LECTURER');
+
